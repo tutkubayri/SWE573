@@ -1,0 +1,4 @@
+I learned that The API is for ruling access point for the server. It is a way to reach data from outside sources.
+I know a program called “Postman” and examined https://opencitations.net/wikidata/api/v1#/metadata/{dois} and get data 
+from this API by using Postman. Also learned that I can reach the data by pasting this link on search bar.
+I also get the data from https://ghibliapi.herokuapp.com/films
