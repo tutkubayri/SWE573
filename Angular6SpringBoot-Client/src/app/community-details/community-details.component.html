@@ -1,0 +1,18 @@
+<div *ngIf="community">
+  <div>
+    <label>Name: </label> {{community.name}}
+  </div>
+  <div>
+    <label>Description: </label> {{community.description}}
+  </div>
+  <div>
+    <label>Semantic Tag: </label> {{community.semanticTag}}
+  </div>
+  <div>
+    <label>Banner URL: </label> {{community.bannerUrl}}
+  </div>
+  <span class="button is-small btn-primary" *ngIf='community.active' (click)='updateActive(false)'>Inactive</span>
+  <span class="button is-small btn-primary" *ngIf='!community.active' (click)='updateActive(true)'>Active</span>
+  <span class="button is-small btn-danger" (click)='deleteCommunity()'>Delete</span>
+  <hr/>
+</div>

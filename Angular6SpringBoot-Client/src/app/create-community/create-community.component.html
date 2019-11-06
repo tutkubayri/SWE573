@@ -1,0 +1,25 @@
+<body class="text-center">
+<form [formGroup]="communityAddForm" class="form-group" (ngSubmit)="add()">
+<h1 class="h3 mb-3 font-weight-normal">Create Community</h1>
+
+
+<input type="text" id="name" formControlName="name" class="form-control" placeholder="Name" name="name">
+<div style="color: red;" *ngIf="communityAddForm.get('name').hasError('required') && communityAddForm.get('name').dirty">"Name" input is required.</div>
+
+<input type="text" id="description" formControlName="description" class="form-control" placeholder="Description" name="description">
+<div style="color: red;" *ngIf="communityAddForm.get('description').hasError('required') && communityAddForm.get('description').dirty">"Description" input is required.</div>
+
+<input type="text" id="semanticTag" formControlName="semanticTag" class="form-control" placeholder="Semantic Tag" name="semanticTag">
+<div style="color: red;" *ngIf="communityAddForm.get('semanticTag').hasError('required') && communityAddForm.get('semanticTag').dirty">"Semantic Tag" input is required.</div>
+
+<input type="text" id="bannerUrl" formControlName="bannerUrl" class="form-control" placeholder="Banner Url" name="bannerUrl">
+<div style="color: red;" *ngIf="communityAddForm.get('bannerUrl').hasError('required') && communityAddForm.get('bannerUrl').dirty">"Banner Url" input is required.</div>
+
+<button type="submit" class="btn btn-success">Submit</button>
+</form>
+</body>
+
+<div [hidden]="!submitted">
+  <h4>You submitted successfully!</h4>
+  <button class="btn btn-success" (click)="newCommunity()">Add</button>
+</div>

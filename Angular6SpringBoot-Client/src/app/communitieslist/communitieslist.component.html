@@ -1,0 +1,13 @@
+<h1 style="text-align: center">Community</h1>
+<div class="column" style="width: auto;">
+<div *ngFor="let community of communities" class="card" style="width: 25rem; float:left; margin-left: 20px; border-block-color:#000;">
+    <img class="card-img-top" [src]="community.bannerUrl" style="width: 15rem; height: auto; text-align: center;">
+    <div class="card-body">
+        <h5 class="card-title">{{community.name}}</h5>
+        <p class="card-text">{{community.description}}</p>
+        <p class="card-text">{{community.semanticTag}}</p>
+        <a [routerLink]="['id', community.id]" class="btn btn-primary active" role="button" routerLinkActive="active">Open</a>
+        <a (click)="join(community)" class="btn btn-primary">Join</a>
+    </div>
+</div>
+</div>

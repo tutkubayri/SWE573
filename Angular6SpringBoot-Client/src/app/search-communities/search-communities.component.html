@@ -1,0 +1,18 @@
+<h3>Find By Name</h3>
+<div style="width: 300px;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="lastname">Name</label>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="name" name="name">
+    </div>
+
+    <div class="btn-group">
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+  </form>
+</div>
+<ul>
+  <li *ngFor="let community of communities">
+    <h4>{{community.id}} - {{community.name}} {{community.description}} {{community.semanticTag}}</h4>
+  </li>
+</ul>
