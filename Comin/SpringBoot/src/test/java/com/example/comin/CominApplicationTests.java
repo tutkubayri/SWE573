@@ -1,4 +1,4 @@
-package com.swe573.comin;
+package com.example.comin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
