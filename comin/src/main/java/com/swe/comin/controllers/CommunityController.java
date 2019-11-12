@@ -39,7 +39,7 @@ public class CommunityController {
         return ResponseEntity.ok(communityService.updateCommunity(communityId, communityRequest));
     }
 
-    @DeleteMapping("/{communityId}")
+    @DeleteMapping("communities/{communityId}")
     public ResponseEntity<ApiResponse> deleteCommunityById(@PathVariable Long communityId) {
         communityService.deleteCommunityById(communityId);
         return ResponseEntity.ok(new ApiResponse("Community has deleted."));
