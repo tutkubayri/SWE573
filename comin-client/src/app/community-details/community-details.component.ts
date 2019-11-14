@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommunityService } from '../community.service';
+import { Observable } from 'rxjs';
 import { Community } from '../community';
-import { CommunitiesListComponent } from '../communitieslist/communitieslist.component';
+import { Post } from '../post';
+import { CommunitiesComponent } from '../communities/communities.component';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,17 +13,19 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CommunityDetailsComponent implements OnInit {
 
-  @Input() community: Community;
+  @Input() communityId: number;
+  community: any;
 
-  constructor(private route: ActivatedRoute, private communityService: CommunityService, private listComponent: CommunitiesListComponent) { }
+  constructor(private route: ActivatedRoute, private communityService: CommunityService, private listComponent: CommunitiesComponent) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-	
-      this.communityService.getCommunity(+params.get('id')).subscribe(c =>{
-       console.log(c);
-       })   
-       });
+    this.route.params.subscribe(params=>{
+      this.communityService.getCommunity(this.communityId).subscribe(data => this.community = data)
+    });
+  }
+
+  getPostTypes(){
+    
   }
 
   updateActive(isActive: boolean) {
