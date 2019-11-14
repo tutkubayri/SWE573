@@ -1,10 +1,7 @@
 package com.swe.comin.controllers;
 
 import com.swe.comin.exceptions.ResourceNotFoundException;
-import com.swe.comin.models.Community;
 import com.swe.comin.models.PostType;
-import com.swe.comin.repositories.CommunityRepository;
-import com.swe.comin.services.CommunityService;
 import com.swe.comin.services.PostTypeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +18,7 @@ public class PostTypeController {
         this.postTypeService = postTypeService;
     }
 
-    @GetMapping("communities/{communityId}/postTypes/{postTypeId}")
+    @GetMapping("communities/{communityId}/postTypes/")
     public ResponseEntity<List<PostType>> getPostTypeByCommunityId(@PathVariable (value="communityId") Long communityId){
         return ResponseEntity.ok(postTypeService.getPostTypeByCommunityId(communityId));    }
 

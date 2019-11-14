@@ -1,7 +1,6 @@
 package com.swe.comin.services;
 
 import com.swe.comin.exceptions.ResourceNotFoundException;
-import com.swe.comin.models.Community;
 import com.swe.comin.models.PostType;
 import com.swe.comin.repositories.CommunityRepository;
 import com.swe.comin.repositories.PostTypeRepository;
@@ -34,8 +33,4 @@ public class PostTypeService {
 
         return postTypeRepository.findByCommunityId(id);
     }
-/*
-    public PostType getPostTypeById(Long id){
-        return postTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post type does not exist."));
-    }*/
 }

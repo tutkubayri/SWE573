@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class CommunityController {
 
@@ -24,7 +24,7 @@ public class CommunityController {
         return ResponseEntity.ok(communityService.getAllCommunity());
     }
 
-    @GetMapping("communities/{communityId}")
+    @GetMapping("id/{communityId}")
     public ResponseEntity<Community> getCommunityById(@PathVariable Long communityId) {
         return ResponseEntity.ok(communityService.getCommunityById(communityId));
     }

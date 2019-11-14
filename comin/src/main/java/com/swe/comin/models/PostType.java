@@ -10,6 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "postTypes")
@@ -26,10 +27,6 @@ public class PostType extends AuditModel{
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -75,5 +72,8 @@ public class PostType extends AuditModel{
     @JoinColumn(name = "community_id", nullable = false)
     @JsonIgnore
     private Community community;
+
+    /*@OneToMany(mappedBy = "postType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<FormArea> formAreas;*/
 }
 

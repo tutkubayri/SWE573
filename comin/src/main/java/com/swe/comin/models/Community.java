@@ -19,18 +19,15 @@ public class Community extends AuditModel {
 
     public Community(){}
 
-    public Community(@NotBlank @Size(min = 3, max = 50) String name, String description, String semanticTag) {
+    public Community(@NotBlank @Size(min = 3, max = 50) String name, String description, String semanticTag, String bannerUrl) {
         this.name = name;
         this.description = description;
         this.semanticTag = semanticTag;
+        this.bannerUrl = bannerUrl;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -65,6 +62,14 @@ public class Community extends AuditModel {
         this.postTypes = postTypes;
     }
 
+    public String getBannerUrl() {
+        return bannerUrl;
+    }
+
+    public void setBannerUrl(String bannerUrl) {
+        this.bannerUrl = bannerUrl;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -78,6 +83,9 @@ public class Community extends AuditModel {
 
     @Column(columnDefinition = "text")
     private String semanticTag;
+
+    @Column(columnDefinition = "text")
+    private String bannerUrl;
 
     @OneToMany(mappedBy = "community", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<PostType> postTypes;
