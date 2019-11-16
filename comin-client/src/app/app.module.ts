@@ -7,15 +7,9 @@ import { CommunityDetailsComponent } from './community-details/community-details
 import { CommunitiesComponent } from './communities/communities.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import {HttpModule} from "@angular/http";
+import { HttpModule} from "@angular/http";
 import { NavComponent } from './nav/nav.component';
 import { CommunityService } from './community.service';
-import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './logout/logout.component';
-import { ProfileComponent } from './profile/profile.component';
-import { AuthService } from './auth.service';
-import { AccountService } from './account.service';
-import { UrlPermission } from './url.permission';
 
 @NgModule({
   declarations: [
@@ -24,9 +18,6 @@ import { UrlPermission } from './url.permission';
     CommunityDetailsComponent,
     CommunitiesComponent,
     NavComponent,
-    LoginComponent,
-    LogoutComponent,
-    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +28,7 @@ import { UrlPermission } from './url.permission';
     HttpModule
   ],
 
-  providers: [CommunityService, CommunitiesComponent, CommunityDetailsComponent, CreateCommunityComponent, AuthService,AccountService,UrlPermission],
+  providers: [CommunityService, CommunitiesComponent, CommunityDetailsComponent, CreateCommunityComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

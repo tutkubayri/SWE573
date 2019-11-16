@@ -1,4 +1,3 @@
-/*
 package com.swe.comin.services;
 
 import com.swe.comin.exceptions.ResourceNotFoundException;
@@ -24,10 +23,10 @@ public class FormAreaService {
                 .map(postType -> {
                     formArea.setPostType(postType);
                     return formAreaRepository.save(formArea);
-                }).orElseThrow(() -> new ResourceNotFoundException("Community not found with id " + postTypeId));
+                }).orElseThrow(() -> new ResourceNotFoundException("PostType not found with id " + postTypeId));
     }
 
     public List<FormArea> getFormAreaByPostTypeId(Long id){
         return formAreaRepository.findByPostTypeId(id);
     }
-}*/
+}

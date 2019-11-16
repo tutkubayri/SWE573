@@ -18,11 +18,11 @@ public class PostTypeController {
         this.postTypeService = postTypeService;
     }
 
-    @GetMapping("communities/{communityId}/postTypes/")
+    @GetMapping("communities/id/{communityId}/postTypes")
     public ResponseEntity<List<PostType>> getPostTypeByCommunityId(@PathVariable (value="communityId") Long communityId){
         return ResponseEntity.ok(postTypeService.getPostTypeByCommunityId(communityId));    }
 
-    @PostMapping({"/communities/{communityId}/postTypes"})
+    @PostMapping({"communities/id/{communityId}/postTypes"})
     public ResponseEntity<PostType> savePostType(@PathVariable (value="communityId") Long communityId, @RequestBody PostType postType) {
         return ResponseEntity.ok(postTypeService.savePostType(communityId, postType));
     }

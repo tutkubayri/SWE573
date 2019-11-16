@@ -10,11 +10,7 @@ export class PostTypeService {
   private baseUrl = 'http://localhost:8080/communities';
   constructor(private http: HttpClient) { }
 
-  getPostTypes(id: number): Observable<Object> {
-
-    let newPath = this.baseUrl
-    if (id) {
-      return this.http.get(`${this.baseUrl}/${id}`);
-    };
-  }
+  getPostTypes(id: number): Observable<any>{
+    return this.http.get(`${this.baseUrl}/id/${id}/postTypes`);
+   }
 }

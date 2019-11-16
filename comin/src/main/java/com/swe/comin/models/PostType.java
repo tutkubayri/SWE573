@@ -14,6 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "postTypes")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class PostType extends AuditModel{
 
     private static final long serialVersionUID = 1L;
@@ -73,7 +74,7 @@ public class PostType extends AuditModel{
     @JsonIgnore
     private Community community;
 
-    /*@OneToMany(mappedBy = "postType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<FormArea> formAreas;*/
+    @OneToMany(mappedBy = "postType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<FormArea> formAreas;
 }
 
