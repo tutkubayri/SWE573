@@ -10,7 +10,7 @@ export class CommunityService {
   private baseUrl = 'http://localhost:8080/communities';
   constructor(private http: HttpClient) { }
 
-  getCommunity(id: number){
+  getCommunityById(id: number): Observable<any>{
     return this.http.get(`${this.baseUrl}/id/${id}`);
    }
 

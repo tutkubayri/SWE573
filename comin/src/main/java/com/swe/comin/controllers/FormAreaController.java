@@ -1,4 +1,3 @@
-/*
 package com.swe.comin.controllers;
 
 import com.swe.comin.models.FormArea;
@@ -20,12 +19,12 @@ public class FormAreaController {
         this.formAreaService = formAreaService;
     }
 
-    @GetMapping("communities/{communityId}/postTypes/{postTypeId}")
+    @GetMapping("communities/id/{communityId}/postTypes/{postTypeId}")
     public ResponseEntity<List<FormArea>> getFormAreaByPostTypeId(@PathVariable (value="postTypeId") Long postTypeId){
         return ResponseEntity.ok(formAreaService.getFormAreaByPostTypeId(postTypeId));    }
 
-    @PostMapping({"/communities/{communityId}/postTypes/{postTypeId}"})
-    public ResponseEntity<FormArea> savePostType(@PathVariable (value="postTypeId") Long postTypeId, @RequestBody FormArea formArea) {
+    @PostMapping({"/communities/id/{communityId}/postTypes/{postTypeId}"})
+    public ResponseEntity<FormArea> saveFormArea(@PathVariable (value="postTypeId") Long postTypeId, @RequestBody FormArea formArea) {
         return ResponseEntity.ok(formAreaService.saveFormArea(postTypeId, formArea));
     }
-}*/
+}

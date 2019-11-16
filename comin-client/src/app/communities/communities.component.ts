@@ -24,7 +24,7 @@ export class CommunitiesComponent implements OnInit {
     });
   }
 
-  deleteCustomers() {
+  deleteCommunities() {
     this.communityService.deleteAll()
       .subscribe(
         data => {

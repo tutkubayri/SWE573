@@ -1,4 +1,3 @@
-/*
 package com.swe.comin.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,7 +11,8 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "formArea")
+@Table(name = "formAreas")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class FormArea extends AuditModel{
 
     private static final long serialVersionUID = 1L;
@@ -59,7 +59,7 @@ public class FormArea extends AuditModel{
     @Column(columnDefinition = "text")
     private String label;
 
-    @Column(columnDefinition = "enum")
+    @Column(columnDefinition = "text")
     private String dataType;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -68,4 +68,3 @@ public class FormArea extends AuditModel{
     private PostType postType;
 }
 
-*/

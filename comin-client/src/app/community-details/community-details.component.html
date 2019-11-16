@@ -1,4 +1,4 @@
-<div *ngIf="community">
+<div *ngIf="this.community">
   <div>
     <label>Name: </label> {{community.name}}
   </div>
@@ -11,12 +11,10 @@
   <div>
     <label>Banner URL: </label> {{community.bannerUrl}}
   </div>
-  <!-- <div *ngIf="posts">
     <div *ngFor="let post of posts"
       style="width: 25rem; float:left; margin-left: 20px; border-block-color:#000;">
       {{post.name}} {{post.usage}}
     </div>
-  </div> -->
   <span class="button is-small btn-primary" *ngIf='community.active' (click)='updateActive(false)'>Inactive</span>
   <span class="button is-small btn-primary" *ngIf='!community.active' (click)='updateActive(true)'>Active</span>
   <span class="button is-small btn-danger" (click)='deleteCommunity()'>Delete</span>

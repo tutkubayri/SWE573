@@ -6,9 +6,9 @@ import { CommunityDetailsComponent } from './community-details/community-details
 
 const routes: Routes = [
     { path: '', redirectTo: 'communities', pathMatch: 'prefix' },
-    { path: 'id/:id', component:  CommunityDetailsComponent},
-    { path: 'communities', component: CommunitiesComponent },
-    { path: 'add', component: CreateCommunityComponent },
+    { path: 'communities/id/:id', component:  CommunityDetailsComponent},
+    { path: 'communities', component: CommunitiesComponent},
+    { path: 'add', component: CreateCommunityComponent }
 ];
 
 @NgModule({

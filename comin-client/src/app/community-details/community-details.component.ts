@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommunityService } from '../community.service';
-import { Observable } from 'rxjs';
 import { Community } from '../community';
-import { Post } from '../post';
 import { CommunitiesComponent } from '../communities/communities.component';
 import { ActivatedRoute } from '@angular/router';
+import { Post } from '../post';
+import { Observable } from 'rxjs';
+import { PostTypeService } from '../post.service';
 
 @Component({
   selector: 'community-details',
@@ -14,18 +15,21 @@ import { ActivatedRoute } from '@angular/router';
 export class CommunityDetailsComponent implements OnInit {
 
   @Input() communityId: number;
-  community: any;
+  community: Community;
+  postTypes: Observable<Post[]>;
 
-  constructor(private route: ActivatedRoute, private communityService: CommunityService, private listComponent: CommunitiesComponent) { }
+  constructor(private route: ActivatedRoute, 
+    private communityService: CommunityService, 
+    private listComponent: CommunitiesComponent,
+    private postService: PostTypeService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params=>{
-      this.communityService.getCommunity(this.communityId).subscribe(data => this.community = data)
+      this.communityService.getCommunityById(this.communityId).subscribe(data => this.community = data)
     });
-  }
-
-  getPostTypes(){
-    
+    this.route.params.subscribe(params=>{
+      this.postService.getPostTypes(this.communityId).subscribe(data => this.postTypes = data)
+    });
   }
 
   updateActive(isActive: boolean) {
@@ -39,7 +43,7 @@ export class CommunityDetailsComponent implements OnInit {
         error => console.log(error));
   }
 
-  deleteCustomer() {
+  deleteCommunity() {
     this.communityService.deleteCommunity(this.community.id)
       .subscribe(
         data => {

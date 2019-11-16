@@ -24,7 +24,7 @@ public class CommunityController {
         return ResponseEntity.ok(communityService.getAllCommunity());
     }
 
-    @GetMapping("id/{communityId}")
+    @GetMapping("communities/id/{communityId}")
     public ResponseEntity<Community> getCommunityById(@PathVariable Long communityId) {
         return ResponseEntity.ok(communityService.getCommunityById(communityId));
     }
