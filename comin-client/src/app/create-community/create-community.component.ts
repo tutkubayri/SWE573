@@ -38,7 +38,7 @@ export class CreateCommunityComponent implements OnInit {
     this.communityService.createCommunity(this.community)
       .subscribe(data => console.log(data), error => console.log(error));
     this.community = new Community();
-    
+    this.newCommunity();
   }
 
   newCommunity(): void {

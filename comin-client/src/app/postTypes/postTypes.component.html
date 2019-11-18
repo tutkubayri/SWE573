@@ -1,0 +1,22 @@
+<body *ngIf="this.postType" class="text-center">
+    <form [formGroup]="formAreaInstanceAddForm" class="form-group" *ngFor="let formArea of postType.formAreas" (ngSubmit)="add()">
+        <h1 class="h3 mb-3 font-weight-normal">Post to {{postType.name}}</h1>
+        <div *ngIf="formArea.dataType == 'text'">
+            <input type="text" id="filled" formControlName="filled" class="form-control"
+                placeholder="{{formArea.label}}" name="filled">
+            <div style="color: red;"
+                *ngIf="formAreaInstanceAddForm.get('filled').hasError('required') && formAreaInstanceAddForm.get('filled').dirty">
+                This input is required.
+            </div>
+        </div>
+        <div *ngIf="formArea.dataType == 'number'">
+            <input type="number" id="filled" formControlName="filled" class="form-control"
+                placeholder="{{formArea.label}}" name="filled">
+            <div style="color: red;"
+                *ngIf="formAreaInstanceAddForm.get('filled').hasError('required') && formAreaInstanceAddForm.get('filled').dirty">
+                This input is required.
+            </div>
+        </div>
+        <button type="submit" style="margin-top: 10px;"class="btn btn-success">Post</button>
+    </form>
+</body>

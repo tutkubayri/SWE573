@@ -17,9 +17,10 @@ public class FormArea extends AuditModel{
 
     private static final long serialVersionUID = 1L;
 
-    public FormArea(String label, String dataType) {
+    public FormArea(String label, String dataType, boolean isRequired) {
         this.label = label;
         this.dataType = dataType;
+        this.isRequired = isRequired;
     }
 
     public PostType getPostType() {
@@ -50,6 +51,14 @@ public class FormArea extends AuditModel{
         this.dataType = dataType;
     }
 
+    public boolean isRequired() {
+        return isRequired;
+    }
+
+    public void setRequired(boolean required) {
+        isRequired = required;
+    }
+
     public FormArea(){}
 
     @Id
@@ -61,6 +70,9 @@ public class FormArea extends AuditModel{
 
     @Column(columnDefinition = "text")
     private String dataType;
+
+    @Column(columnDefinition = "text")
+    private boolean isRequired;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "postType_id", nullable = false)

@@ -54,6 +54,14 @@ public class PostType extends AuditModel{
         this.community = community;
     }
 
+    public Set<FormArea> getFormAreas() {
+        return formAreas;
+    }
+
+    public void setFormAreas(Set<FormArea> formAreas) {
+        this.formAreas = formAreas;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

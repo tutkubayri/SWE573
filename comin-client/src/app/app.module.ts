@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule} from "@angular/http";
 import { NavComponent } from './nav/nav.component';
 import { CommunityService } from './community.service';
+import { PostTypesComponent } from './postTypes/postTypes.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { CommunityService } from './community.service';
     CommunityDetailsComponent,
     CommunitiesComponent,
     NavComponent,
+    PostTypesComponent,
   ],
   imports: [
     BrowserModule,
