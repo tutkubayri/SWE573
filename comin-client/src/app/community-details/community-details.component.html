@@ -1,22 +1,36 @@
-<div *ngIf="this.community">
-  <div>
-    <label>Name: </label> {{community.name}}
-  </div>
-  <div>
-    <label>Description: </label> {{community.description}}
-  </div>
-  <div>
-    <label>Semantic Tag: </label> {{community.semanticTag}}
-  </div>
-  <div>
-    <label>Banner URL: </label> {{community.bannerUrl}}
-  </div>
-    <div *ngFor="let post of posts"
-      style="width: 25rem; float:left; margin-left: 20px; border-block-color:#000;">
-      {{post.name}} {{post.usage}}
+<div *ngIf="this.community" class="row mb-5">
+  <div class="col-lg-9 mx-auto">
+    <div class="col-lg-5">
+      <img [src]="community.bannerUrl" style="width: 600px; float: left; margin-right: 15px;" />
     </div>
-  <span class="button is-small btn-primary" *ngIf='community.active' (click)='updateActive(false)'>Inactive</span>
-  <span class="button is-small btn-primary" *ngIf='!community.active' (click)='updateActive(true)'>Active</span>
-  <span class="button is-small btn-danger" (click)='deleteCommunity()'>Delete</span>
-  <hr />
+    <div class="col-lg-4" style="float: left;">
+      <div style="margin-bottom: 10px;">
+        <b>{{community.name}}</b>
+      </div>
+      <div>
+        <label>Description: </label> {{community.description}}
+      </div>
+      <div>
+        <label>Semantic Tag: </label> {{community.semanticTag}}
+      </div>
+
+      <!-- <span class="button is-small btn-primary" *ngIf='community.active' (click)='updateActive(false)'>Inactive</span>
+  <span class="button is-small btn-primary" *ngIf='!community.active' (click)='updateActive(true)'>Active</span> -->
+
+        <button type="button" class="btn btn-sm btn-outline-secondary" style="margin-right: 10px;" [routerLink]="['/postTypes/add', community.id]">Create New Post Type</button>
+        <button class="btn btn-sm btn-danger" (click)='deleteCommunity()'>Delete Community</button>
+    </div>
+  </div>
+
+  <div class="col-lg-9 mx-auto" style="margin-top: 10px;">
+    <div class="col-md-3" *ngFor="let postType of community.postTypes">
+      <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+          <p class="card-text">Post Type Name: {{postType.name}}</p>
+          <p class="card-text">Post Type Usage: {{postType.usage}}</p>
+          <button type="button" class="btn btn-sm btn-outline-secondary" [routerLink]="['/postTypes', postType.id]">Create {{postType.name}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,6 +1,7 @@
 package com.swe.comin.controllers;
 
 import com.swe.comin.exceptions.ResourceNotFoundException;
+import com.swe.comin.models.Community;
 import com.swe.comin.models.PostType;
 import com.swe.comin.services.PostTypeService;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class PostTypeController {
 
@@ -18,11 +20,16 @@ public class PostTypeController {
         this.postTypeService = postTypeService;
     }
 
-    @GetMapping("communities/id/{communityId}/postTypes")
-    public ResponseEntity<List<PostType>> getPostTypeByCommunityId(@PathVariable (value="communityId") Long communityId){
-        return ResponseEntity.ok(postTypeService.getPostTypeByCommunityId(communityId));    }
+    @GetMapping("postTypes/{postTypeId}")
+    public ResponseEntity<PostType> getPostTypeById(@PathVariable (value="postTypeId") Long postTypeId) {
+        return ResponseEntity.ok(postTypeService.getPostTypeById(postTypeId));
+    }
 
-    @PostMapping({"communities/id/{communityId}/postTypes"})
+    /*@GetMapping("postTypes/{communityId}")
+    public ResponseEntity<List<PostType>> getPostTypeByCommunityId(@PathVariable (value="communityId") Long communityId){
+        return ResponseEntity.ok(postTypeService.getPostTypeByCommunityId(communityId));    }*/
+
+    @PostMapping({"postTypes/add/{communityId}"})
     public ResponseEntity<PostType> savePostType(@PathVariable (value="communityId") Long communityId, @RequestBody PostType postType) {
         return ResponseEntity.ok(postTypeService.savePostType(communityId, postType));
     }

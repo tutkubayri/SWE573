@@ -21,6 +21,10 @@ public class PostTypeService {
         this.postTypeRepository = postTypeRepository;
     }
 
+    public PostType getPostTypeById(Long id){
+        return postTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post type does not exist."));
+    }
+
     public PostType savePostType(Long communityId, PostType postType){
         return communityRepository.findById(communityId)
                 .map(community -> {
@@ -30,7 +34,6 @@ public class PostTypeService {
     }
 
     public List<PostType> getPostTypeByCommunityId(Long id){
-
         return postTypeRepository.findByCommunityId(id);
     }
 }

@@ -7,10 +7,10 @@ import { Observable } from 'rxjs';
 })
 export class PostTypeService {
 
-  private baseUrl = 'http://localhost:8080/communities';
+  private baseUrl = 'http://localhost:8080/postTypes';
   constructor(private http: HttpClient) { }
 
-  getPostTypes(id: number): Observable<any>{
-    return this.http.get(`${this.baseUrl}/id/${id}/postTypes`);
+  getPostTypeById(id: number): Observable<any>{
+    return this.http.get(`${this.baseUrl}/${id}`);
    }
 }

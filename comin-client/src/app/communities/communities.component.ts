@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CommunityService } from '../community.service';
-import { Community } from '../community';
+import { CommunityService } from '../services/community.service';
+import { Community } from '../services/community';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

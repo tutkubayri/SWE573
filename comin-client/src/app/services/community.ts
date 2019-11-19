@@ -1,3 +1,5 @@
+import { PostType } from '../postType';
+
 export class Community
  {
     id: number;
@@ -5,5 +7,5 @@ export class Community
     description: string;
     semanticTag: string;
     bannerUrl: string;
-    // postTypes: List<Forms>;
+    postTypes: Array<PostType>;
 }

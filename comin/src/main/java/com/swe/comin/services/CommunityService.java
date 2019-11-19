@@ -2,17 +2,23 @@ package com.swe.comin.services;
 
 import com.swe.comin.exceptions.ResourceNotFoundException;
 import com.swe.comin.models.Community;
+import com.swe.comin.models.PostType;
 import com.swe.comin.repositories.CommunityRepository;
+import com.swe.comin.repositories.PostTypeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CommunityService {
     private CommunityRepository communityRepository;
+    private PostTypeRepository postTypeRepository;
 
-    public CommunityService(CommunityRepository communityRepository) {
+    public CommunityService(CommunityRepository communityRepository, PostTypeRepository postTypeRepository) {
         this.communityRepository = communityRepository;
+        this.postTypeRepository = postTypeRepository;
     }
 
     public List<Community> getAllCommunity(){

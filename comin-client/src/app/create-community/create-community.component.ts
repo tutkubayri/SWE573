@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Community } from '../community';
-import { CommunityService } from '../community.service';
+import { Community } from '../services/community';
+import { CommunityService } from '../services/community.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -38,7 +38,7 @@ export class CreateCommunityComponent implements OnInit {
     this.communityService.createCommunity(this.community)
       .subscribe(data => console.log(data), error => console.log(error));
     this.community = new Community();
-    
+    this.newCommunity();
   }
 
   newCommunity(): void {
