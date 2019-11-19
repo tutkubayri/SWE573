@@ -29,7 +29,7 @@ public class PostTypeController {
     public ResponseEntity<List<PostType>> getPostTypeByCommunityId(@PathVariable (value="communityId") Long communityId){
         return ResponseEntity.ok(postTypeService.getPostTypeByCommunityId(communityId));    }*/
 
-    @PostMapping({"postTypes/{communityId}"})
+    @PostMapping({"postTypes/add/{communityId}"})
     public ResponseEntity<PostType> savePostType(@PathVariable (value="communityId") Long communityId, @RequestBody PostType postType) {
         return ResponseEntity.ok(postTypeService.savePostType(communityId, postType));
     }

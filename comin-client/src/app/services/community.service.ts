@@ -7,22 +7,13 @@ import { Observable } from 'rxjs';
 })
 export class CommunityService {
 
-  x:number
-
   private baseUrl = 'http://localhost:8080/communities';
   constructor(private http: HttpClient) { }
 
   getCommunityById(id: number): Observable<any>{
     return this.http.get(`${this.baseUrl}/id/${id}`);
    }
-
-  /* getCommunity(id: number): Observable<Object> {
-
-    let newPath = this.baseUrl
-    if (id) {
-      return this.http.get(`${this.baseUrl}/id/${id}`);
-    };
-  } */
+   
   createCommunity(community: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}` + `/add`, community);
   }

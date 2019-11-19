@@ -17,7 +17,7 @@
       <!-- <span class="button is-small btn-primary" *ngIf='community.active' (click)='updateActive(false)'>Inactive</span>
   <span class="button is-small btn-primary" *ngIf='!community.active' (click)='updateActive(true)'>Active</span> -->
 
-        <button type="button" class="btn btn-sm btn-outline-secondary" style="margin-right: 10px;">Create New Post Type</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" style="margin-right: 10px;" [routerLink]="['/postTypes/add', community.id]">Create New Post Type</button>
         <button class="btn btn-sm btn-danger" (click)='deleteCommunity()'>Delete Community</button>
     </div>
   </div>

@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CommunityService } from '../community.service';
-import { Community } from '../community';
+import { CommunityService } from '../services/community.service';
+import { Community } from '../services/community';
 import { CommunitiesComponent } from '../communities/communities.component';
 import { ActivatedRoute } from '@angular/router';
 import { PostType } from '../postType';
 import { Observable } from 'rxjs';
-import { PostTypeService } from '../postType.service';
+import { PostTypeService } from '../services/postType.service';
 
 @Component({
   selector: 'community-details',

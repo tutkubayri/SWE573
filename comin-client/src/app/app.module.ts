@@ -9,8 +9,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule} from "@angular/http";
 import { NavComponent } from './nav/nav.component';
-import { CommunityService } from './community.service';
 import { PostTypesComponent } from './postTypes/postTypes.component';
+import { NewPostTypeComponent } from './newPostType/newPostType.component';
+import { CommunityService } from './services/community.service';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { PostTypesComponent } from './postTypes/postTypes.component';
     CommunitiesComponent,
     NavComponent,
     PostTypesComponent,
+    NewPostTypeComponent,
   ],
   imports: [
     BrowserModule,

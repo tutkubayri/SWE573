@@ -4,6 +4,7 @@ import { CommunitiesComponent } from './communities/communities.component';
 import { CreateCommunityComponent } from './create-community/create-community.component';
 import { CommunityDetailsComponent } from './community-details/community-details.component';
 import { PostTypesComponent } from './postTypes/postTypes.component';
+import { NewPostTypeComponent } from './newPostType/newPostType.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'communities', pathMatch: 'prefix' },
@@ -11,6 +12,7 @@ const routes: Routes = [
     { path: 'communities', component: CommunitiesComponent},
     { path: 'postTypes/:id', component: PostTypesComponent},
     { path: 'communities/add', component: CreateCommunityComponent },
+    { path: 'postTypes/add/:id', component: NewPostTypeComponent},
 ];
 
 @NgModule({

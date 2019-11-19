@@ -1,10 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostType } from '../postType';
 import { ActivatedRoute } from '@angular/router';
-import { PostTypeService } from '../postType.service';
+import { PostTypeService } from '../services/postType.service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { FormArea } from '../formArea';
 import { Observable } from 'rxjs';
+import { Integer } from '../Integer';
+//import { TextService } from '../text.service';
 
 @Component({
   selector: 'app-postTypes',
@@ -17,8 +19,11 @@ export class PostTypesComponent implements OnInit {
   postType: PostType;
   formAreas: Observable<FormArea[]>;
   formAreaInstanceAddForm:FormGroup;
+  Text: Text;
+  Integer: Integer;
+  submitted = false;
 
-  constructor(private route: ActivatedRoute, 
+  constructor(private route: ActivatedRoute, //private textService: TextService,
     private postTypeService: PostTypeService, private formBuilder:FormBuilder) { }
 
   createFormAreaInstanceAddForm(){
@@ -34,9 +39,16 @@ export class PostTypesComponent implements OnInit {
     this.createFormAreaInstanceAddForm();
   }
 
-  /* add(){
+ /*  add(){
     if(this.formAreaInstanceAddForm.valid){
-      this.community = Object.assign({},this.communityAddForm.value)
+      if(this.formAreaInstanceAddForm.get("filled").value == String){
+        this.Text = Object.assign({},this.formAreaInstanceAddForm.value);
+      }
     }
+    this.submitted = true;
+    this.textService.createCommunity(this.community)
+      .subscribe(data => console.log(data), error => console.log(error));
+    this.community = new Community();
+    this.newCommunity();
   } */
 }
