@@ -1,4 +1,4 @@
-import { PostType } from '../postType';
+import { PostType } from './postType';
 
 export class Community
  {

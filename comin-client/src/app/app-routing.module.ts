@@ -10,7 +10,7 @@ const routes: Routes = [
     { path: '', redirectTo: 'communities', pathMatch: 'prefix' },
     { path: 'communities/id/:id', component:  CommunityDetailsComponent},
     { path: 'communities', component: CommunitiesComponent},
-    { path: 'postTypes/:id', component: PostTypesComponent},
+    { path: 'posts/add/:id', component: PostTypesComponent},
     { path: 'communities/add', component: CreateCommunityComponent },
     { path: 'postTypes/add/:id', component: NewPostTypeComponent},
 ];

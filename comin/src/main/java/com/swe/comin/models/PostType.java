@@ -72,11 +72,6 @@ public class PostType extends AuditModel{
     @Column(columnDefinition = "text")
     private String usage;
 
-    /*@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "community_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore*/
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "community_id", nullable = false)
     @JsonIgnore
@@ -84,5 +79,8 @@ public class PostType extends AuditModel{
 
     @OneToMany(mappedBy = "postType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<FormArea> formAreas;
+
+    @OneToMany(mappedBy = "postType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Post> posts;
 }
 

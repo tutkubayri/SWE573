@@ -1,9 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostType } from '../postType';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { NewPostTypeService } from '../services/newPostType.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommunityService } from '../services/community.service';
+import { PostTypeService } from '../services/postType.service';
+import { Community } from '../community';
 
 @Component({
   selector: 'app-newPostType.',
@@ -13,23 +15,42 @@ import { CommunityService } from '../services/community.service';
 export class NewPostTypeComponent implements OnInit {
 
   submitted = false;
-  community: any;
-  postTypeAddForm:FormGroup;
-  postType: PostType = new PostType();
-  constructor(private route: ActivatedRoute, private communityService: CommunityService, private newPostTypeService: NewPostTypeService, private formBuilder:FormBuilder) { }
+  postTypeAddForm: FormGroup;
+  formAreas: FormArray;
+  postType: PostType
+  @Input() id: number;
+  community: Community;
 
-  createPostTypeAddForm(){
+  constructor(private route: ActivatedRoute, private communityService: CommunityService,
+    private newPostTypeService: NewPostTypeService, private formBuilder: FormBuilder) { }
+
+  createPostTypeAddForm() {
     this.postTypeAddForm = this.formBuilder.group({
-      name:["",Validators.required],
-      usage:["",Validators.required],
+      name: ["", Validators.required],
+      usage: ["", Validators.required],
+      formAreas: this.formBuilder.array([
+        this.initFormArea(),
+      ])
     });
   }
 
-  ngOnInit() {
-    this.createPostTypeAddForm();
-    this.route.params.subscribe(params=>{
-      this.communityService.getCommunityById(params.id).subscribe(data => this.community = data)
+  addFormArea():void{
+    this.formAreas = this.postTypeAddForm.get('formAreas') as FormArray;
+    this.formAreas.push(this.initFormArea());
+  }
+
+  initFormArea():FormGroup{
+    return this.formBuilder.group({
+      label: ['', Validators.required],
+      dataType: ['', Validators.required],
+      isRequired: ['', Validators.required]
     });
+  }
+  ngOnInit() {
+   this.createPostTypeAddForm();
+   this.route.params.subscribe(params=>{
+    this.communityService.getCommunityById(params.id).subscribe(data => this.community = data)
+  });
   }
 
   add(){
@@ -47,5 +68,4 @@ export class NewPostTypeComponent implements OnInit {
     this.submitted = false;
     this.postType = new PostType();
   }
-
 }
