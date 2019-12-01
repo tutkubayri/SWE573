@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { IntegerService } from './integer.service';
+import { FormAreaService } from './form-area.service';
 
-describe('IntegerService', () => {
+describe('FormAreaService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: IntegerService = TestBed.get(IntegerService);
+    const service: FormAreaService = TestBed.get(FormAreaService);
     expect(service).toBeTruthy();
   });
 });

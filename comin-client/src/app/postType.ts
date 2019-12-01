@@ -1,4 +1,5 @@
 import { FormArea } from './formArea';
+import { Post } from './post';
 
 export class PostType
  {
@@ -7,4 +8,5 @@ export class PostType
     usage: string;
     communityId: number;
     formAreas: Array<FormArea>;
+    posts: Array<Post>;
 }

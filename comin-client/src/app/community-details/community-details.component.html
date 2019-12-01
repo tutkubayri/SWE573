@@ -17,18 +17,40 @@
       <!-- <span class="button is-small btn-primary" *ngIf='community.active' (click)='updateActive(false)'>Inactive</span>
   <span class="button is-small btn-primary" *ngIf='!community.active' (click)='updateActive(true)'>Active</span> -->
 
-        <button type="button" class="btn btn-sm btn-outline-secondary" style="margin-right: 10px;" [routerLink]="['/postTypes/add', community.id]">Create New Post Type</button>
-        <button class="btn btn-sm btn-danger" (click)='deleteCommunity()'>Delete Community</button>
+      <button type="button" class="btn btn-sm btn-outline-secondary" style="margin-right: 10px;"
+        [routerLink]="['/postTypes/add', community.id]">Create New Post Type</button>
+      <button class="btn btn-sm btn-danger" (click)='deleteCommunity()'>Delete Community</button>
     </div>
   </div>
 
-  <div class="col-lg-9 mx-auto" style="margin-top: 10px;">
-    <div class="col-md-3" *ngFor="let postType of community.postTypes">
-      <div class="card mb-3 shadow-sm">
-        <div class="card-body">
-          <p class="card-text">Post Type Name: {{postType.name}}</p>
-          <p class="card-text">Post Type Usage: {{postType.usage}}</p>
-          <button type="button" class="btn btn-sm btn-outline-secondary" [routerLink]="['/postTypes', postType.id]">Create {{postType.name}}</button>
+  <div class="col-lg-9 mx-auto" style="margin-top: 10px">
+    <div class="col-md-4" *ngFor="let postType of community.postTypes" style="float: left; height:max-content">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body" >
+          <p class="card-text"><b>{{postType.name}}</b></p>
+          <p class="card-text">Usage: {{postType.usage}}</p>
+          <div style="float: right;">
+            <img style="margin-right: 10px;" type="button"
+              src="https://img.icons8.com/material-sharp/24/000000/edit.png">
+            <img type="button" [routerLink]="['/posts/add', community.id]"
+              src="https://img.icons8.com/office/24/000000/plus-2-math.png">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-9 mx-auto" *ngFor="let postType of community.postTypes" style="margin-top: 10px">
+    <div class="col-md-4" *ngFor="let post of postType.posts" style="float: left; height:max-content">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body" >
+          <p class="card-text"><b>deneme</b></p>
+          <div style="float: right;">
+            <img style="margin-right: 10px;" type="button"
+              src="https://img.icons8.com/material-sharp/24/000000/edit.png">
+            <img type="button" [routerLink]="['/postTypes', postType.id]"
+              src="https://img.icons8.com/office/24/000000/plus-2-math.png">
+          </div>
         </div>
       </div>
     </div>

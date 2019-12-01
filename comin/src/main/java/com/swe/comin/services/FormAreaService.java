@@ -13,6 +13,9 @@ public class FormAreaService {
     private PostTypeRepository postTypeRepository;
     private FormAreaRepository formAreaRepository;
 
+    public FormAreaService() {
+    }
+
     public FormAreaService(FormAreaRepository formAreaRepository, PostTypeRepository postTypeRepository) {
         this.formAreaRepository = formAreaRepository;
         this.postTypeRepository = postTypeRepository;

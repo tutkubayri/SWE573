@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CommunityService } from '../services/community.service';
-import { Community } from '../services/community';
 import { ActivatedRoute } from '@angular/router';
+import { Community } from '../community';
 
 @Component({
   selector: 'communities',

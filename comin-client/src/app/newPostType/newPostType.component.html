@@ -1,18 +1,43 @@
-<body class="text-center">
-    <form [formGroup]="postTypeAddForm" class="form-group" (ngSubmit)="add()">
+<!-- <body class="text-center">
+    <form [formGroup]="postTypeAddForm" class="form-group">
         <h1 class="h3 mb-3 font-weight-normal">Create Post Type</h1>
-
         <input type="text" id="name" formControlName="name" class="form-control" placeholder="Name" name="name">
         <div style="color: red;"
-            *ngIf="postTypeAddForm.get('name').hasError('required') && postTypeAddForm.get('name').dirty">"Name" input
-            is
-            required.</div>
-
+            *ngIf="postTypeAddForm.get('name').hasError('required') && postTypeAddForm.get('name').dirty">
+            "Name" input is required.</div>
         <input type="text" id="usage" formControlName="usage" class="form-control" placeholder="Usage" name="usage">
         <div style="color: red;"
             *ngIf="postTypeAddForm.get('usage').hasError('required') && postTypeAddForm.get('usage').dirty">
             "Usage" input is required.</div>
+        <h5>Form Areas</h5>
+        <div formArrayName="formAreas" *ngFor="let item of postTypeAddForm.get('formAreas').controls; let i = index;"
+            style="margin-bottom: 10px;">
+            <div [formGroupName]="i">
+                <input formControlName="label" placeholder="Label">
+                <input formControlName="dataType" placeholder="Data Type">
+                <label>Is Required
+                <input type="checkbox" formControlName="isRequired">
+            </label>
+            </div>
+        </div>
+        <button class="btn btn-success" (click)="addFormArea()">Add Form Area</button>
+        <button class="btn btn-success" (click)="add()">Create</button>
+    </form>
+</body> -->
 
-        <button type="submit" class="btn btn-success">Create</button>
+<body class="text-center">
+    <form [formGroup]="postTypeAddForm" class="form-group" style="float: left;">
+        <h1 class="h3 mb-3 font-weight-normal">Create Post Type</h1>
+        <input type="text" id="name" formControlName="name" class="form-control" placeholder="Name" name="name">
+        <div style="color: red;"
+            *ngIf="postTypeAddForm.get('name').hasError('required') && postTypeAddForm.get('name').dirty">
+            "Name" input is required.</div>
+        <input type="text" id="usage" formControlName="usage" class="form-control" placeholder="Usage" name="usage">
+        <div style="color: red;"
+            *ngIf="postTypeAddForm.get('usage').hasError('required') && postTypeAddForm.get('usage').dirty">
+            "Usage" input is required.</div>
+            <button class="btn btn-success" (click)="save()">Create Post Type</button>
+
+        <button *ngIf="saved" class="btn btn-success" [routerLink]="['/formAreas/add', this.postType.id]">Create Form Area</button>
     </form>
 </body>

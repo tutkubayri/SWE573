@@ -21,8 +21,15 @@ public class PostTypeService {
         this.postTypeRepository = postTypeRepository;
     }
 
+    public PostTypeService() {
+    }
+
     public PostType getPostTypeById(Long id){
         return postTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post type does not exist."));
+    }
+
+    public PostType getPostTypeByName(String name){
+        return postTypeRepository.findByName(name);
     }
 
     public PostType savePostType(Long communityId, PostType postType){

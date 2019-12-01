@@ -12,6 +12,7 @@ import { NavComponent } from './nav/nav.component';
 import { PostTypesComponent } from './postTypes/postTypes.component';
 import { NewPostTypeComponent } from './newPostType/newPostType.component';
 import { CommunityService } from './services/community.service';
+import { FormAreaComponent } from './form-area/form-area.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { CommunityService } from './services/community.service';
     NavComponent,
     PostTypesComponent,
     NewPostTypeComponent,
+    FormAreaComponent,
   ],
   imports: [
     BrowserModule,

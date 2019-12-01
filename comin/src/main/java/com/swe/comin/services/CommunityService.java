@@ -14,11 +14,12 @@ import java.util.Set;
 @Service
 public class CommunityService {
     private CommunityRepository communityRepository;
-    private PostTypeRepository postTypeRepository;
 
-    public CommunityService(CommunityRepository communityRepository, PostTypeRepository postTypeRepository) {
+    public CommunityService() {
+    }
+
+    public CommunityService(CommunityRepository communityRepository) {
         this.communityRepository = communityRepository;
-        this.postTypeRepository = postTypeRepository;
     }
 
     public List<Community> getAllCommunity(){

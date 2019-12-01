@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface PostTypeRepository extends JpaRepository<PostType, Long> {
     public List<PostType> findByCommunityId(Long communityId);
+    public PostType findByName(String postTypeName);
 }
