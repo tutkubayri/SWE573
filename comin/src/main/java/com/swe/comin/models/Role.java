@@ -1,18 +1,31 @@
 package com.swe.comin.models;
 
+import org.hibernate.annotations.NaturalId;
 import javax.persistence.*;
 
-import java.util.Set;
-
+/**
+ * Created by rajeevkumarsingh on 01/08/17.
+ */
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 public class Role {
-    private Long id;
-    private String name;
-    private Set<User> users;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Enumerated(EnumType.STRING)
+    @NaturalId
+    @Column(length = 60)
+    private RoleName name;
+
+    public Role() {
+
+    }
+
+    public Role(RoleName name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
@@ -21,20 +34,12 @@ public class Role {
         this.id = id;
     }
 
-    public String getName() {
+    public RoleName getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(RoleName name) {
         this.name = name;
     }
 
-    @ManyToMany(mappedBy = "roles")
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
 }

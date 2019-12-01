@@ -17,8 +17,11 @@ public class PostService {
     private PostTypeRepository postTypeRepository;
 
     public PostService(PostRepository postRepository) {
-
         this.postRepository = postRepository;
+    }
+
+    public PostService() {
+
     }
 
     public List<Post> getPostByPostTypeId(Long id){
