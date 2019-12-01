@@ -25,6 +25,11 @@ public class PostTypeController {
         return ResponseEntity.ok(postTypeService.getPostTypeById(postTypeId));
     }
 
+    /*@GetMapping("postTypes/{postTypeName}")
+    public ResponseEntity<PostType> getPostTypeByName(@PathVariable (value="postTypeName") String postTypeName) {
+        return ResponseEntity.ok(postTypeService.getPostTypeByName(postTypeName));
+    }*/
+
     /*@GetMapping("postTypes/{communityId}")
     public ResponseEntity<List<PostType>> getPostTypeByCommunityId(@PathVariable (value="communityId") Long communityId){
         return ResponseEntity.ok(postTypeService.getPostTypeByCommunityId(communityId));    }*/

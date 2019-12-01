@@ -1,0 +1,20 @@
+<div *ngIf="this.postType">
+<form [formGroup]="formAddForm" class="form-group">
+    <h1 class="h3 mb-3 font-weight-normal">Create Form Area</h1>
+    <h3>{{postType.name}}</h3>
+    <h3>{{postType.usage}}</h3>
+    <div formArrayName="formAreas"
+        *ngFor="let item of formAddForm.get('formAreas').controls; let i = index;"
+        style="margin-bottom: 10px;">
+        <div [formGroupName]="i">
+                <input type="text" id="label" formControlName="label" class="form-control" placeholder="Label" name="label">
+                <input type="text" id="dataType" formControlName="dataType" class="form-control" placeholder="Data Type" name="dataType">
+                <label>Is Required
+                    <input type="checkbox" formControlName="isRequired" class="form-control" name="isRequired">
+                </label>
+        </div>
+    </div>
+    <button class="btn btn-success" (click)="addFormArea()">Add Form Area</button>
+    <button class="btn btn-success" (click)="add()">Create</button>
+</form>
+</div>
