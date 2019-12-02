@@ -1,3 +1,4 @@
+/*
 package com.swe.comin;
 
 import org.springframework.stereotype.Component;
@@ -22,4 +23,4 @@ public class CorsFilter extends OncePerRequestFilter {
         response.addIntHeader("Access-Control-Max-Age", 10);
         filterChain.doFilter(request, response);
     }
-}
+}*/

@@ -2,7 +2,6 @@ package com.swe.comin.controllers;
 
 import com.swe.comin.models.Post;
 import com.swe.comin.services.PostService;
-import javafx.geometry.Pos;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

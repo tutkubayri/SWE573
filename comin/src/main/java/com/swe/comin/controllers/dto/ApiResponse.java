@@ -1,4 +1,4 @@
-package com.swe.comin.models;
+package com.swe.comin.controllers.dto;
 
 import lombok.*;
 
@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ApiResponse {
+
     private Boolean success;
     private String message;
 }
