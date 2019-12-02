@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
-public class WJwtTokenProvider {
+public class JwtTokenProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
 
@@ -60,4 +60,5 @@ public class WJwtTokenProvider {
         }
         return false;
     }
+
 }

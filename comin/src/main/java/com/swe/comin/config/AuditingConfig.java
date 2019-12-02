@@ -1,6 +1,6 @@
-package com.example.polls.config;
+package com.swe.comin.config;
 
-import com.example.polls.security.UserPrincipal;
+import com.swe.comin.security.UserPrincipal;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -12,11 +12,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.Optional;
 
 @Configuration
-@EnableJpaAuditing
+//@EnableJpaAuditing
 public class AuditingConfig {
 
     @Bean
-    public AuditorAware<Long> auditorProvider() {
+    public AuditorAware<Long> auditorProvider(){
         return new SpringSecurityAuditAwareImpl();
     }
 }
