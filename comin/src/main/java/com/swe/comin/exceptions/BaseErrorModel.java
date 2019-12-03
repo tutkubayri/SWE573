@@ -1,4 +1,5 @@
 package com.swe.comin.exceptions;
+
 import lombok.Builder;
 import lombok.Data;
 

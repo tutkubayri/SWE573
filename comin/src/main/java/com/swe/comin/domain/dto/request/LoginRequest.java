@@ -1,18 +1,15 @@
-package com.swe.comin.controllers.dto;
+package com.swe.comin.domain.dto.request;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class LoginRequest {
-
     @NotBlank
-    private String usernameOrEmail;
+    private String email;
 
     @NotBlank
     private String password;

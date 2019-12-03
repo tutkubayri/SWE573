@@ -1,14 +1,11 @@
-package com.swe.comin.controllers.dto;
+package com.swe.comin.domain.dto.response;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
 public class ApiResponse {
-
     private Boolean success;
     private String message;
 }

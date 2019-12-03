@@ -1,4 +1,4 @@
-package com.swe.comin.controllers.dto;
+package com.swe.comin.domain.dto.response;
 
 import lombok.*;
 

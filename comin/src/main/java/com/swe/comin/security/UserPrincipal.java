@@ -1,17 +1,19 @@
 package com.swe.comin.security;
 
+import com.swe.comin.domain.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.swe.comin.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -20,23 +22,31 @@ import java.util.Objects;
 public class UserPrincipal implements UserDetails {
 
     private Long id;
-    private String name;
     private String username;
-
     @JsonIgnore
     private String email;
-
     @JsonIgnore
     private String password;
 
-    public static UserPrincipal create(User user) {
+    private Collection<? extends GrantedAuthority> authorities;
 
-        return new UserPrincipal(user.getId(), user.getName(), user.getUsername(), user.getEmail(), user.getPassword());
+    public static UserPrincipal create(User user) {
+        List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
+                new SimpleGrantedAuthority(role.getName().name())
+        ).collect(Collectors.toList());
+
+        return new UserPrincipal(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getPassword(),
+                authorities
+        );
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>();
+        return authorities;
     }
 
     @Override
@@ -69,7 +79,6 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(id);
     }
 }

@@ -1,42 +1,48 @@
 package com.swe.comin.controllers;
 
-import com.swe.comin.controllers.dto.UserIdentityAvailability;
-import com.swe.comin.controllers.dto.UserProfile;
-import com.swe.comin.controllers.dto.UserResponse;
+import com.swe.comin.domain.dto.request.UserRequest;
+import com.swe.comin.domain.dto.response.UserIdentityAvailability;
+import com.swe.comin.domain.dto.response.UserProfile;
+import com.swe.comin.domain.dto.response.UserSummary;
 import com.swe.comin.security.CurrentUser;
 import com.swe.comin.security.UserPrincipal;
 import com.swe.comin.services.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     private UserService userService;
-
 
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping("/user/me")
-    public UserResponse getCurrentUser(@CurrentUser UserPrincipal currentUser){
+    @GetMapping("/me")
+    public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
         return userService.getCurrentUser(currentUser);
     }
 
-    @GetMapping("/user/checkUsernameAvailability")
-    public UserIdentityAvailability checkUsernameAvailability(@RequestParam String username){
+    @GetMapping("/user/{username}")
+    public UserProfile getUserProfile(@PathVariable(value = "username") String username){
+        return userService.getUserProfile(username);
+    }
+
+    @GetMapping("/checkUsernameAvailability")
+    public UserIdentityAvailability checkUsernameAvailability(@RequestParam(value = "username") String username) {
         return userService.checkUsernameAvailability(username);
     }
 
-    @GetMapping("/user/checkEmailAvailability")
-    public UserIdentityAvailability checkEmailAvailability(@RequestParam String email){
-        return userService.checkEmailAvailability(email);
+    @GetMapping("/checkEmailAvailability")
+    public UserIdentityAvailability checkEmailAvailability(@RequestParam(value = "email") String email) {
+        return userService.checkUserEmailAvailability(email);
     }
 
-    @GetMapping("/users/{username}")
-    public UserProfile getUserProfile(@PathVariable String username) {
-        return userService.getUserProfileByUsername(username);
+    @PostMapping("/createUser")
+    public ResponseEntity<?> createUser(@RequestBody UserRequest userRequest){
+        return userService.createUser(userRequest);
     }
 
 }

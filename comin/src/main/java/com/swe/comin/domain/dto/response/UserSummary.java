@@ -1,4 +1,4 @@
-package com.swe.comin.controllers.dto;
+package com.swe.comin.domain.dto.response;
 
 import lombok.*;
 
@@ -7,10 +7,8 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserResponse {
-
+public class UserSummary {
     private Long id;
     private String username;
-    private String name;
-
+    private String email;
 }
