@@ -1,9 +1,7 @@
 package com.swe.comin.controllers;
 
 import com.swe.comin.models.FormArea;
-import com.swe.comin.models.PostType;
 import com.swe.comin.services.FormAreaService;
-import com.swe.comin.services.PostTypeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

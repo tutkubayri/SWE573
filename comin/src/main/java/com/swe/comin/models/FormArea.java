@@ -11,14 +11,24 @@ import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "formAreas")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class FormArea extends AuditModel{
 
     private static final long serialVersionUID = 1L;
+
+    public FormArea() {
+        super();
+    }
+
+    public FormArea(String label, String dataType, boolean isRequired, PostType postType) {
+        super();
+        this.label = label;
+        this.dataType = dataType;
+        this.isRequired = isRequired;
+        this.postType = postType;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

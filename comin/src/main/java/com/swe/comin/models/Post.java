@@ -25,8 +25,8 @@ public class Post extends AuditModel {
     @JsonIgnore
     private PostType postType;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    /*@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "community_id", nullable = false)
     @JsonIgnore
-    private Community community;
+    private Community community;*/
 }

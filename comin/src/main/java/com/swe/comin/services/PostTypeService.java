@@ -4,25 +4,19 @@ import com.swe.comin.exceptions.ResourceNotFoundException;
 import com.swe.comin.models.PostType;
 import com.swe.comin.repositories.CommunityRepository;
 import com.swe.comin.repositories.PostTypeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Service
 public class PostTypeService {
+
+    @Autowired
     private PostTypeRepository postTypeRepository;
+
+    @Autowired
     private CommunityRepository communityRepository;
-
-    public PostTypeService(PostTypeRepository postTypeRepository, CommunityRepository communityRepository) {
-        this.communityRepository = communityRepository;
-        this.postTypeRepository = postTypeRepository;
-    }
-
-    public PostTypeService() {
-    }
 
     public PostType getPostTypeById(Long id){
         return postTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post type does not exist."));

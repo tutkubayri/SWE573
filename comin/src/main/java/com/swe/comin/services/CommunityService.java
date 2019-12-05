@@ -5,22 +5,17 @@ import com.swe.comin.models.Community;
 import com.swe.comin.models.PostType;
 import com.swe.comin.repositories.CommunityRepository;
 import com.swe.comin.repositories.PostTypeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import javax.xml.stream.events.Comment;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class CommunityService {
+public class CommunityService{
+    @Autowired
     private CommunityRepository communityRepository;
-
-    public CommunityService() {
-    }
-
-    public CommunityService(CommunityRepository communityRepository) {
-        this.communityRepository = communityRepository;
-    }
 
     public List<Community> getAllCommunity(){
         return communityRepository.findAll();

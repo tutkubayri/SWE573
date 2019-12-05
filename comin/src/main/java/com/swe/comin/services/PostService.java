@@ -1,28 +1,22 @@
 package com.swe.comin.services;
 
 import com.swe.comin.exceptions.ResourceNotFoundException;
-import com.swe.comin.models.Community;
 import com.swe.comin.models.Post;
-import com.swe.comin.models.PostType;
-import com.swe.comin.repositories.CommunityRepository;
 import com.swe.comin.repositories.PostRepository;
 import com.swe.comin.repositories.PostTypeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class PostService {
+public class PostService{
+
+    @Autowired
     private PostRepository postRepository;
+
+    @Autowired
     private PostTypeRepository postTypeRepository;
-
-    public PostService(PostRepository postRepository) {
-        this.postRepository = postRepository;
-    }
-
-    public PostService() {
-
-    }
 
     public List<Post> getPostByPostTypeId(Long id){
         return postRepository.findByPostTypeId(id);
