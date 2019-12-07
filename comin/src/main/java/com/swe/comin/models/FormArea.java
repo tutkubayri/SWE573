@@ -10,7 +10,7 @@ import java.io.Serializable;
 import lombok.*;
 
 @Entity
-@Table(name = "formAreas")
+@Table(name = "formArea")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class FormArea extends AuditModel{
 
@@ -19,11 +19,19 @@ public class FormArea extends AuditModel{
     public FormArea() {
     }
 
-    public FormArea(String label, String dataType, boolean areaRequired, PostType postType) {
+    public FormArea(String label, String dataType, boolean requirement, PostType postType) {
         this.label = label;
         this.dataType = dataType;
-        this.areaRequired = areaRequired;
+        this.requirement = requirement;
         this.postType = postType;
+    }
+
+    public boolean getRequirement() {
+        return requirement;
+    }
+
+    public void setRequirement(boolean requirement) {
+        this.requirement = requirement;
     }
 
     public Long getId() {
@@ -50,14 +58,6 @@ public class FormArea extends AuditModel{
         this.dataType = dataType;
     }
 
-    public boolean isAreaRequired() {
-        return areaRequired;
-    }
-
-    public void setAreaRequired(boolean areaRequired) {
-        this.areaRequired = areaRequired;
-    }
-
     public PostType getPostType() {
         return postType;
     }
@@ -77,7 +77,7 @@ public class FormArea extends AuditModel{
     private String dataType;
 
     @Column(columnDefinition = "text")
-    private boolean areaRequired;
+    private boolean requirement;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "postType_id", nullable = false)

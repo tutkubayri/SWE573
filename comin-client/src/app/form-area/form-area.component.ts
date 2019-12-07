@@ -48,7 +48,7 @@ export class FormAreaComponent implements OnInit {
     return this.formBuilder.group({
       label: ['', Validators.required],
       dataType: ['', Validators.required],
-      isAreaRequired: ['', Validators.required]
+      requirement: ['', Validators.required]
     });
   }
 

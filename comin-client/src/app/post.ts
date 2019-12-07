@@ -1,8 +1,8 @@
-import { FormArea } from './formArea';
+import { PostType } from './postType';
 
 export class Post
- {
-    id: number;
-    postTypeId: number;
-    formAreas: Array<FormArea>;
+{
+    postId: number;
+    postText: JSON;
+    postType: PostType
 }

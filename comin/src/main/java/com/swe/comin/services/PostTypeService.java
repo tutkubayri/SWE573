@@ -15,9 +15,6 @@ public class PostTypeService {
     private PostTypeRepository postTypeRepository;
     private CommunityRepository communityRepository;
 
-    public PostTypeService() {
-    }
-
     public PostTypeService(PostTypeRepository postTypeRepository, CommunityRepository communityRepository) {
         this.postTypeRepository = postTypeRepository;
         this.communityRepository = communityRepository;
