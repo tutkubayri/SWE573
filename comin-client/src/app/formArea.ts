@@ -4,5 +4,5 @@ export class FormArea
     label: string;
     dataType: string;
     postTypeId: number;
-    isRequired: boolean;
+    areaRequired: Boolean;
 }

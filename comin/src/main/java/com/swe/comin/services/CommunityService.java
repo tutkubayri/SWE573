@@ -14,8 +14,15 @@ import java.util.Set;
 
 @Service
 public class CommunityService{
-    @Autowired
+
     private CommunityRepository communityRepository;
+
+    public CommunityService() {
+    }
+
+    public CommunityService(CommunityRepository communityRepository) {
+        this.communityRepository = communityRepository;
+    }
 
     public List<Community> getAllCommunity(){
         return communityRepository.findAll();

@@ -12,11 +12,16 @@ import java.util.List;
 @Service
 public class FormAreaService {
 
-    @Autowired
     private PostTypeRepository postTypeRepository;
-
-    @Autowired
     private FormAreaRepository formAreaRepository;
+
+    public FormAreaService() {
+    }
+
+    public FormAreaService(PostTypeRepository postTypeRepository, FormAreaRepository formAreaRepository) {
+        this.postTypeRepository = postTypeRepository;
+        this.formAreaRepository = formAreaRepository;
+    }
 
     public FormArea saveFormArea(Long postTypeId, FormArea formArea){
         return postTypeRepository.findById(postTypeId)

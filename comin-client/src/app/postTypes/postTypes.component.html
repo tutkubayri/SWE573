@@ -18,6 +18,14 @@
                     This input is required.
                 </div>
             </div>
+            <div *ngIf="formArea.dataType == 'date'">
+                <input type="date" id="filled" formControlName="filled" class="form-control"
+                    placeholder="{{formArea.label}}" name="filled">
+                <div style="color: red;"
+                    *ngIf="formAreaInstanceAddForm.get('filled').hasError('required') && formAreaInstanceAddForm.get('filled').dirty">
+                    This input is required.
+                </div>
+            </div>
         </div>
         <button type="submit" style="margin-top: 10px;" class="btn btn-success">Post</button>
     </form>

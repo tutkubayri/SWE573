@@ -22,7 +22,6 @@ export class NewPostTypeComponent implements OnInit {
   postTypeAddForm: FormGroup;
   postTypeFormArea: Array<FormArea>;
   postType: PostType
-  savedPostType: any
   community: Community;
 
   constructor(private route: ActivatedRoute, private communityService: CommunityService,

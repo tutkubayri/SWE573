@@ -6,14 +6,35 @@ import javax.persistence.*;
 import lombok.*;
 import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Entity
 @Table(name = "posts")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Post extends AuditModel {
+
+    public Post() {
+    }
+
+    public Post(PostType postType) {
+        this.postType = postType;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public PostType getPostType() {
+        return postType;
+    }
+
+    public void setPostType(PostType postType) {
+        this.postType = postType;
+    }
+
     private static final long serialVersionUID = 1L;
 
     @Id

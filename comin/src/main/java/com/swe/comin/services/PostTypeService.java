@@ -12,11 +12,16 @@ import java.util.List;
 @Service
 public class PostTypeService {
 
-    @Autowired
     private PostTypeRepository postTypeRepository;
-
-    @Autowired
     private CommunityRepository communityRepository;
+
+    public PostTypeService() {
+    }
+
+    public PostTypeService(PostTypeRepository postTypeRepository, CommunityRepository communityRepository) {
+        this.postTypeRepository = postTypeRepository;
+        this.communityRepository = communityRepository;
+    }
 
     public PostType getPostTypeById(Long id){
         return postTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post type does not exist."));

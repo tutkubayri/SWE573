@@ -12,11 +12,16 @@ import java.util.List;
 @Service
 public class PostService{
 
-    @Autowired
     private PostRepository postRepository;
-
-    @Autowired
     private PostTypeRepository postTypeRepository;
+
+    public PostService() {
+    }
+
+    public PostService(PostRepository postRepository, PostTypeRepository postTypeRepository) {
+        this.postRepository = postRepository;
+        this.postTypeRepository = postTypeRepository;
+    }
 
     public List<Post> getPostByPostTypeId(Long id){
         return postRepository.findByPostTypeId(id);
