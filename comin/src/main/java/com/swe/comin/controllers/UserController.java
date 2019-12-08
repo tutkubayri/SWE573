@@ -35,14 +35,13 @@ public class UserController {
         return userService.checkUsernameAvailability(username);
     }
 
-    @GetMapping("/checkEmailAvailability")
+   /* @GetMapping("/checkEmailAvailability")
     public UserIdentityAvailability checkEmailAvailability(@RequestParam(value = "email") String email) {
         return userService.checkUserEmailAvailability(email);
-    }
+    }*/
 
-    @PostMapping("/createUser")
+    /*@PostMapping("/createUser")
     public ResponseEntity<?> createUser(@RequestBody UserRequest userRequest){
         return userService.createUser(userRequest);
-    }
-
+    }*/
 }

@@ -6,6 +6,7 @@ import { CommunityDetailsComponent } from './community-details/community-details
 import { PostTypesComponent } from './postTypes/postTypes.component';
 import { NewPostTypeComponent } from './newPostType/newPostType.component';
 import { FormAreaComponent } from './form-area/form-area.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'communities', pathMatch: 'prefix' },
@@ -15,6 +16,7 @@ const routes: Routes = [
     { path: 'postTypes/add/:id', component: NewPostTypeComponent},
     { path: 'formAreas/add/:id', component: FormAreaComponent},
     { path: 'posts/add/:id', component: PostTypesComponent},
+    { path: 'auth/signin', component: LoginComponent},
 ];
 
 @NgModule({

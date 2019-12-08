@@ -13,6 +13,10 @@ import { PostTypesComponent } from './postTypes/postTypes.component';
 import { NewPostTypeComponent } from './newPostType/newPostType.component';
 import { CommunityService } from './services/community.service';
 import { FormAreaComponent } from './form-area/form-area.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { AuthenticationService } from './services/authentication.service';
+import { AlertService } from './services/alert.service';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,8 @@ import { FormAreaComponent } from './form-area/form-area.component';
     PostTypesComponent,
     NewPostTypeComponent,
     FormAreaComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +40,7 @@ import { FormAreaComponent } from './form-area/form-area.component';
     HttpModule
   ],
 
-  providers: [CommunityService, CommunitiesComponent, CommunityDetailsComponent, CreateCommunityComponent],
+  providers: [CommunityService, CommunitiesComponent, CommunityDetailsComponent, CreateCommunityComponent, AuthenticationService, AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
