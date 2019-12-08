@@ -1,4 +1,4 @@
-package com.swe.comin.exceptions;
+package com.swe.comin.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

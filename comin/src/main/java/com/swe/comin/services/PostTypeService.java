@@ -1,6 +1,6 @@
 package com.swe.comin.services;
 
-import com.swe.comin.exceptions.ResourceNotFoundException;
+import com.swe.comin.exception.ResourceNotFoundException;
 import com.swe.comin.models.PostType;
 import com.swe.comin.repositories.CommunityRepository;
 import com.swe.comin.repositories.PostTypeRepository;

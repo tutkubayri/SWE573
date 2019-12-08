@@ -1,6 +1,6 @@
 package com.swe.comin.services;
 
-import com.swe.comin.exceptions.ResourceNotFoundException;
+import com.swe.comin.exception.ResourceNotFoundException;
 import com.swe.comin.models.Community;
 import com.swe.comin.repositories.CommunityRepository;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.swe.comin.services;
 
-import com.swe.comin.exceptions.ResourceNotFoundException;
+import com.swe.comin.exception.ResourceNotFoundException;
 import com.swe.comin.models.FormArea;
 import com.swe.comin.repositories.FormAreaRepository;
 import com.swe.comin.repositories.PostTypeRepository;
