@@ -9,14 +9,69 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "community")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Community extends AuditModel {
+
+    public Community() {
+    }
+
+    public Community(@NotBlank @Size(min = 3, max = 50) String name, String description, String semanticTag, String bannerUrl, Set<PostType> postTypes) {
+        this.name = name;
+        this.description = description;
+        this.semanticTag = semanticTag;
+        this.bannerUrl = bannerUrl;
+        this.postTypes = postTypes;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getSemanticTag() {
+        return semanticTag;
+    }
+
+    public void setSemanticTag(String semanticTag) {
+        this.semanticTag = semanticTag;
+    }
+
+    public String getBannerUrl() {
+        return bannerUrl;
+    }
+
+    public void setBannerUrl(String bannerUrl) {
+        this.bannerUrl = bannerUrl;
+    }
+
+    public Set<PostType> getPostTypes() {
+        return postTypes;
+    }
+
+    public void setPostTypes(Set<PostType> postTypes) {
+        this.postTypes = postTypes;
+    }
 
     private static final long serialVersionUID = 1L;
 

@@ -38,35 +38,35 @@ export class FormAreaComponent implements OnInit {
   createFormAddForm() {
     this.formAddForm = this.formBuilder.group({
       formAreas: this.formBuilder.array([
-        this.initFormArea(),
       ])
     });
+    this.formAreas = this.formAddForm.get('formAreas') as FormArray;
+    this.formAreas.push(this.initFormArea());
   }
 
   initFormArea(): FormGroup {
     return this.formBuilder.group({
       label: ['', Validators.required],
       dataType: ['', Validators.required],
-      isRequired: ['', Validators.required]
+      requirement: ['', Validators.required]
     });
   }
 
-  add() {
-    if (this.formAddForm.valid) {
-      for (let f of this.formAddForm.get("formAreas").value) {
-        console.log(f);
-        this.formArea = Object.assign({}, f)
+  add(){
+    if(this.formAddForm.valid){
+      for(let i = 0; i<this.formAreas.length; i++){
+        this.formArea = Object.assign({},this.formAddForm.get("formAreas").value[i]);
         this.submitted = true;
         this.formAreaService.createFormArea(this.formArea, this.postType.id)
-          .subscribe(data => this.formArea, error => console.log(error));
-        this.formArea = new FormArea();
+      .subscribe(data => {
+        this.formArea = data['formArea'];
         this.newFormArea();
+      }, error => console.log(error));
       }
     }
   }
 
   newFormArea(): void {
-    this.submitted = false;
-    this.formArea = new FormArea();
+        this.submitted = false;
   }
 }

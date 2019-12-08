@@ -1,14 +1,9 @@
 package com.swe.comin.controllers;
 
-import com.swe.comin.exceptions.ResourceNotFoundException;
-import com.swe.comin.models.Community;
 import com.swe.comin.models.PostType;
 import com.swe.comin.services.PostTypeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController

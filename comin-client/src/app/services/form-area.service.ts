@@ -14,4 +14,8 @@ export class FormAreaService {
   createFormArea(formArea: Object, id:number): Observable<Object> {
     return this.http.post(`${this.baseUrl}/add/${id}`, formArea);
   }
+
+  getFormAreasByPostTypeId(id: number): Observable<any>{
+    return this.http.get(`${this.baseUrl}/${id}`);
+   }
 }

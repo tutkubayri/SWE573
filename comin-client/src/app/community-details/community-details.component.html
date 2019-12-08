@@ -24,9 +24,10 @@
   </div>
 
   <div class="col-lg-9 mx-auto" style="margin-top: 10px">
+    <h3>Post Types</h3>
     <div class="col-md-4" *ngFor="let postType of community.postTypes" style="float: left; height:max-content">
       <div class="card mb-4 shadow-sm">
-        <div class="card-body" >
+        <div class="card-body">
           <p class="card-text"><b>{{postType.name}}</b></p>
           <p class="card-text">Usage: {{postType.usage}}</p>
           <div style="float: right;">
@@ -39,11 +40,10 @@
       </div>
     </div>
   </div>
-
   <div class="col-lg-9 mx-auto" *ngFor="let postType of community.postTypes" style="margin-top: 10px">
     <div class="col-md-4" *ngFor="let post of postType.posts" style="float: left; height:max-content">
       <div class="card mb-4 shadow-sm">
-        <div class="card-body" >
+        <div class="card-body">
           <p class="card-text"><b>deneme</b></p>
           <div style="float: right;">
             <img style="margin-right: 10px;" type="button"

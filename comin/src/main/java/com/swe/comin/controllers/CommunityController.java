@@ -1,11 +1,9 @@
 package com.swe.comin.controllers;
 
-import com.swe.comin.models.ApiResponse;
 import com.swe.comin.models.Community;
 import com.swe.comin.services.CommunityService;
 import com.swe.comin.services.PostTypeService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
