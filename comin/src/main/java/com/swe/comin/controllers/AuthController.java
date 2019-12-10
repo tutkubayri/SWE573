@@ -60,7 +60,7 @@ public class AuthController {
 		this.tokenProvider = tokenProvider;
 	}
 
-    @PostMapping("/signin")
+   /* @PostMapping("/signin")
 	public ResponseEntity<JwtAuthenticationResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(
@@ -71,6 +71,21 @@ public class AuthController {
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
+		String jwt = tokenProvider.generateToken(authentication);
+		return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+	}*/
+
+	@PostMapping("/signin")
+	public ResponseEntity<JwtAuthenticationResponse> authenticateUser(@Valid String email, @Valid String password) {
+		Authentication authentication = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(
+						email,
+						password
+				)
+		);
+
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+
 		String jwt = tokenProvider.generateToken(authentication);
 		return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
 	}

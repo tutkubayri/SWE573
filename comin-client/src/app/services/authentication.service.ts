@@ -4,10 +4,11 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthenticationService {
+    private baseUrl = 'http://localhost:8080/auth';
     constructor(private http: HttpClient) { }
 
-    login(loginRequest: string) {
-        return this.http.post<any>(`http://localhost:8080/auth/signin`, { loginRequest: loginRequest})
+    login(email: string, password: string) {
+        return this.http.post<any>(`/auth/signin`, { email: email, password: password })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {
