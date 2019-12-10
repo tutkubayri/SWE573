@@ -27,22 +27,19 @@ export class CreateCommunityComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.submitted = false;
     this.createCommunityAddForm();
   }
 
   add(){
     if(this.communityAddForm.valid){
       this.community = Object.assign({},this.communityAddForm.value)
+      console.log(this.communityAddForm.value);
     }
     this.submitted = true;
     this.communityService.createCommunity(this.community)
-      .subscribe(data => console.log(data), error => console.log(error));
-    this.community = new Community();
-    this.newCommunity();
-  }
-
-  newCommunity(): void {
-    this.submitted = false;
-    this.community = new Community();
+  .subscribe(data => {
+    this.community = data['community'];
+  }, error => console.log(error));
   }
 }

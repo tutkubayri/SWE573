@@ -18,7 +18,7 @@ export class CommunityDetailsComponent implements OnInit {
   community: Community;
   postTypes: Observable<PostType[]>;
   pText: JSON;
-  pArray: Array<String>;
+  pArray: Array<Array<String>>;
 
   constructor(private route: ActivatedRoute, 
     private communityService: CommunityService, 
@@ -30,10 +30,11 @@ export class CommunityDetailsComponent implements OnInit {
     });
   }
 
-  stringToJSON(postText:string):Array<String>{
+  stringToJSON(postText:string) :Array<Array<String>>{
     this.pText = JSON.parse(postText);
-    for(let key in this.pText){
-      this.pArray.push(JSON.stringify(this.pText[key]));
+    this.pArray = new Array<Array<String>>();
+    for(let i = 0; i<Object.values(this.pText).length; i++){
+      this.pArray.push([JSON.stringify(Object.keys(this.pText)[i]) + ": " + JSON.stringify(Object.values(this.pText)[i])]);
     }
     return this.pArray;
   }

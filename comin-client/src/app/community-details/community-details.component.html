@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div class="col-lg-9 mx-auto" style="margin-top: 10px">
+  <div class="col-lg-9 mx-auto" style="margin-top: 10px" >
     <h3>Post Types</h3>
     <div class="col-md-4" *ngFor="let postType of community.postTypes" style="float: left; height:max-content">
       <div class="card mb-4 shadow-sm">
@@ -40,11 +40,13 @@
       </div>
     </div>
   </div>
+  <div class="col-lg-9 mx-auto">
+  <h3>Posts</h3>
   <div class="col-lg-9 mx-auto" *ngFor="let postType of community.postTypes" style="margin-top: 10px">
     <div class="col-md-4" *ngFor="let post of postType.posts" style="float: left; height:max-content">
       <div class="card mb-4 shadow-sm">
         <div class="card-body">
-          <p class="card-text" *ngFor="let i of stringToJSON(post.postText)">{{ i }}</p>
+          <p class="card-text" *ngFor="let area of stringToJSON(post.postText)">{{area}}</p>
           <div style="float: right;">
             <img style="margin-right: 10px;" type="button"
               src="https://img.icons8.com/material-sharp/24/000000/edit.png">
@@ -54,5 +56,6 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>

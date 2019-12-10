@@ -24,6 +24,7 @@ export class FormAreaComponent implements OnInit {
     private postTypeService: PostTypeService) { }
 
   ngOnInit() {
+    this.submitted = false;
     this.route.params.subscribe(params => {
       this.postTypeService.getPostTypeById(params.id).subscribe(data => this.postType = data)
     });
@@ -60,13 +61,8 @@ export class FormAreaComponent implements OnInit {
         this.formAreaService.createFormArea(this.formArea, this.postType.id)
       .subscribe(data => {
         this.formArea = data['formArea'];
-        this.newFormArea();
       }, error => console.log(error));
       }
     }
-  }
-
-  newFormArea(): void {
-        this.submitted = false;
   }
 }

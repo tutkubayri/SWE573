@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 @Table(name = "community")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Community extends AuditModel {
+public class Community{
 
     public Community() {
     }

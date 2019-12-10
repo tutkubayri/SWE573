@@ -39,5 +39,7 @@
             <button class="btn btn-success" (click)="save()">Create Post Type</button>
 
         <button *ngIf="saved" class="btn btn-success" [routerLink]="['/formAreas/add', this.postType.id]">Create Form Area</button>
+        <div style="color: green;"
+        *ngIf="this.submitted">Post type is created successfully.</div>
     </form>
 </body>

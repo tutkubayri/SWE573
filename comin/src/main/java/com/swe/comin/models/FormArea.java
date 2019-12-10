@@ -12,7 +12,7 @@ import lombok.*;
 @Entity
 @Table(name = "formArea")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class FormArea extends AuditModel{
+public class FormArea{
 
     private static final long serialVersionUID = 1L;
 

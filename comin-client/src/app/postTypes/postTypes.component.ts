@@ -37,6 +37,7 @@ export class PostTypesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.submitted = false;
     this.route.params.subscribe(params=>{
       this.postTypeService.getPostTypeById(params.id).subscribe(data => this.createFormAreaInstanceAddForm(data));
       });
@@ -51,12 +52,9 @@ export class PostTypesComponent implements OnInit {
   }
 
   add(){
-    //console.log(Object.keys(this.formAreaInstanceAddForm.controls).length);
-
     if(this.formAreaInstanceAddForm.valid){
       let trialPost = {id: null, postText: JSON.stringify(this.formAreaInstanceAddForm.value), postTypeId: this.postType.id};
       this.post = Object.assign({},trialPost);
-      console.log(JSON.parse(JSON.stringify(this.formAreaInstanceAddForm.value)).data[0]);
     }
     this.submitted = true;
     this.postService.createPost(this.postType.id, this.post)
@@ -67,7 +65,6 @@ export class PostTypesComponent implements OnInit {
   }
 
   newPost(): void {
-    this.submitted = false;
     this.post = new Post();
   }
 }
