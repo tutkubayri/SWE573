@@ -17,6 +17,8 @@ export class CommunityDetailsComponent implements OnInit {
   @Input() id: number;
   community: Community;
   postTypes: Observable<PostType[]>;
+  pText: JSON;
+  pArray: Array<String>;
 
   constructor(private route: ActivatedRoute, 
     private communityService: CommunityService, 
@@ -26,6 +28,14 @@ export class CommunityDetailsComponent implements OnInit {
     this.route.params.subscribe(params=>{
       this.communityService.getCommunityById(params.id).subscribe(data => this.community = data)
     });
+  }
+
+  stringToJSON(postText:string):Array<String>{
+    this.pText = JSON.parse(postText);
+    for(let key in this.pText){
+      this.pArray.push(JSON.stringify(this.pText[key]));
+    }
+    return this.pArray;
   }
 
   updateActive(isActive: boolean) {

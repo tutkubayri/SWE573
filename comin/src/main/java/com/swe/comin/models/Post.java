@@ -5,14 +5,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Type;
-
 import java.util.List;
-
 
 @Entity
 @Table(name = "posts")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Post extends AuditModel {
+public class Post{
 
     public long getId() {
         return id;
@@ -41,8 +39,9 @@ public class Post extends AuditModel {
     public Post() {
     }
 
-    public Post(PostType postType) {
+    public Post(PostType postType, String postText) {
         this.postType = postType;
+        this.postText = postText;
     }
 
     private static final long serialVersionUID = 1L;
@@ -51,16 +50,12 @@ public class Post extends AuditModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(columnDefinition = "jsonb")
+    @Column(columnDefinition = "text", name="postText")
     private String postText;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "postType_id", nullable = false)
+    @JoinColumn(name = "post_type_id", nullable = false)
     @JsonIgnore
     private PostType postType;
 
-    /*@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "community_id", nullable = false)
-    @JsonIgnore
-    private Community community;*/
 }

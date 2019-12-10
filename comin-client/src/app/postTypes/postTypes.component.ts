@@ -18,32 +18,29 @@ export class PostTypesComponent implements OnInit {
 
   @Input() id: number;
   postType: PostType;
-  formAreas: Observable<FormArea[]>;
+  formAreas: String [];
   formAreaInstanceAddForm: FormGroup;
   post: Post;
   submitted = false;
-  createdFormAreas: FormArray;
+  jsonVersion: JSON;
 
   constructor(private route: ActivatedRoute, private postTypeService: PostTypeService,
     private postService: PostService, private formBuilder: FormBuilder, private formAreaService: FormAreaService) { }
 
-  createFormAreaInstanceAddForm() {
+  createFormAreaInstanceAddForm(postType: PostType) {
+    this.postType = postType;
     this.formAreaInstanceAddForm = this.formBuilder.group({
-
     });
-   /*  for (let j = 0; j < this.formAreas.length; j++) {
-      this.formAreaInstanceAddForm.addControl("this.formAreas[j].label", new FormControl('', Validators.required));
-    } */
+    for (let j = 0; j < postType.formAreas.length; j++) {
+      this.formAreaInstanceAddForm.addControl(postType.formAreas[j].label, new FormControl('', Validators.required));
+    } 
   }
 
   ngOnInit() {
     this.route.params.subscribe(params=>{
-      this.postTypeService.getPostTypeById(params.id).subscribe(data => 
-        this.postType = data)
-        this.formAreaService.getFormAreasByPostTypeId(this.postType.id).subscribe(data2 =>
-          this.formAreas = data2)
+      this.postTypeService.getPostTypeById(params.id).subscribe(data => this.createFormAreaInstanceAddForm(data));
       });
-    this.createFormAreaInstanceAddForm();
+    
   }
 
   getFormAreas(postTypeId:number){
@@ -53,25 +50,24 @@ export class PostTypesComponent implements OnInit {
       }, error => console.log(error));
   }
 
-  /* add(){
+  add(){
+    //console.log(Object.keys(this.formAreaInstanceAddForm.controls).length);
+
     if(this.formAreaInstanceAddForm.valid){
-      if(this.formAreaInstanceAddForm.get("filled").value == String){
-        this.post.texts.push(this.formAreaInstanceAddForm.get("filled").value);
-      }
-      if(this.formAreaInstanceAddForm.get("filled").value == Number){
-        this.post.integers.push(this.formAreaInstanceAddForm.get("filled").value);
-      }
-      this.post = Object.assign({},this.formAreaInstanceAddForm.value)
+      let trialPost = {id: null, postText: JSON.stringify(this.formAreaInstanceAddForm.value), postTypeId: this.postType.id};
+      this.post = Object.assign({},trialPost);
+      console.log(JSON.parse(JSON.stringify(this.formAreaInstanceAddForm.value)).data[0]);
     }
     this.submitted = true;
-    this.postService.createPost(this.post, this.id)
-      .subscribe(data => console.log(data), error => console.log(error));
-    this.post = new Post();
-    this.newPost();
+    this.postService.createPost(this.postType.id, this.post)
+      .subscribe(data => {
+        this.post = data;
+        this.newPost();
+      }, error => console.log(error));
   }
 
   newPost(): void {
     this.submitted = false;
     this.post = new Post();
-  } */
+  }
 }

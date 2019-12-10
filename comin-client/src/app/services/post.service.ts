@@ -10,7 +10,7 @@ export class PostService {
   private baseUrl = 'http://localhost:8080/posts';
   constructor(private http: HttpClient) { }
 
-  createPost(post: Object, id: number): Observable<any>{
+  createPost(id: number, post: Object): Observable<any>{
     return this.http.post(`${this.baseUrl}/add/${id}`, post);
    }
 }
