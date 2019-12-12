@@ -16,6 +16,8 @@ export class CreateCommunityComponent implements OnInit {
 
   communityAddForm:FormGroup;
   community: Community = new Community();
+  tagArray: Object;
+  list = false;
 
   createCommunityAddForm(){
     this.communityAddForm = this.formBuilder.group({
@@ -40,6 +42,15 @@ export class CreateCommunityComponent implements OnInit {
     this.communityService.createCommunity(this.community)
   .subscribe(data => {
     this.community = data['community'];
+  }, error => console.log(error));
+  }
+
+  tagSearch(){
+    this.communityService.tagSearch(this.communityAddForm.get("semanticTag").value).subscribe(data => {
+    this.tagArray = data;
+    console.log(Object.keys(Object.entries(Object.entries(this.tagArray)[1])[1][1][1]));
+    console.log(Object.values(Object.entries(Object.entries(this.tagArray)[1])[1][1][1])[1]);
+    this.list = true;
   }, error => console.log(error));
   }
 }

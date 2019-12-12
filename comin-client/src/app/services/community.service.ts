@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class CommunityService {
 
   private baseUrl = 'http://localhost:8080/communities';
+  private wikiUrl = 'https://www.wikidata.org/w/api.php?action=wbsearchentities&limit=10&language=en&format=json&search=';
   constructor(private http: HttpClient) { }
 
   getCommunityById(id: number): Observable<any>{
@@ -34,5 +35,8 @@ export class CommunityService {
   }
   deleteAll(): Observable<any> {
     return this.http.delete(`${this.baseUrl}` + `/delete`, { responseType: 'text' });
+  }
+  tagSearch(tag:string): Observable<any> {
+    return this.http.get(`${this.wikiUrl}${tag}` + `&origin=*`);
   }
 }

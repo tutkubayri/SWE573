@@ -18,6 +18,7 @@
     <div style="color: red;"
       *ngIf="communityAddForm.get('semanticTag').hasError('required') && communityAddForm.get('semanticTag').dirty">
       "Semantic Tag" input is required.</div>
+      <button type="button" class="btn btn-success" (click)="tagSearch()">Search in WikiData</button>
 
     <input type="text" id="bannerUrl" formControlName="bannerUrl" class="form-control" placeholder="Banner Url"
       name="bannerUrl">
