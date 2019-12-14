@@ -7,7 +7,6 @@ import { CommunityService } from '../services/community.service';
 import { PostTypeService } from '../services/postType.service';
 import { Community } from '../community';
 import { FormArea } from '../formArea';
-import { Post } from '../post';
 
 @Component({
   selector: 'app-newPostType.',

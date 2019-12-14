@@ -17,12 +17,14 @@ public class Community{
     public Community() {
     }
 
-    public Community(@NotBlank @Size(min = 3, max = 50) String name, String description, String semanticTag, String bannerUrl, Set<PostType> postTypes) {
+    public Community(@NotBlank @Size(min = 3, max = 50) String name, String description, String semanticTag,
+                     String bannerUrl, Set<PostType> postTypes, String selectedTags) {
         this.name = name;
         this.description = description;
         this.semanticTag = semanticTag;
         this.bannerUrl = bannerUrl;
         this.postTypes = postTypes;
+        this.selectedTags = selectedTags;
     }
 
     public Long getId() {
@@ -73,6 +75,14 @@ public class Community{
         this.postTypes = postTypes;
     }
 
+    public String getSelectedTags() {
+        return selectedTags;
+    }
+
+    public void setSelectedTags(String selectedTags) {
+        this.selectedTags = selectedTags;
+    }
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -88,6 +98,9 @@ public class Community{
 
     @Column(columnDefinition = "text")
     private String semanticTag;
+
+    @Column(columnDefinition = "text")
+    private String selectedTags;
 
     @Column(columnDefinition = "text")
     private String bannerUrl;

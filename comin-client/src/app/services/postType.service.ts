@@ -17,4 +17,8 @@ export class PostTypeService {
    getPostTypeByName(name: string): Observable<any>{
     return this.http.get(`${this.baseUrl}/${name}`);
    }
+
+   getPostTypesList(): Observable<any> {
+    return this.http.get(`${this.baseUrl}`);
+  }
 }

@@ -1,7 +1,7 @@
 <div *ngIf="this.community" class="row mb-5">
   <div class="col-lg-9 mx-auto">
     <div class="col-lg-5">
-      <img [src]="community.bannerUrl" style="width: 600px; float: left; margin-right: 15px;" />
+      <img [src]="community.bannerUrl" style="width: 200px; height: 100px;float: left; margin-right: 15px;" />
     </div>
     <div class="col-lg-4" style="float: left;">
       <div style="margin-bottom: 10px;">
@@ -11,8 +11,9 @@
         <label>Description: </label> {{community.description}}
       </div>
       <div>
-        <label>Semantic Tag: </label> {{community.semanticTag}}
+        <label>Selected Tag(s): </label> {{this.tarray}}
       </div>
+    
 
       <!-- <span class="button is-small btn-primary" *ngIf='community.active' (click)='updateActive(false)'>Inactive</span>
   <span class="button is-small btn-primary" *ngIf='!community.active' (click)='updateActive(true)'>Active</span> -->

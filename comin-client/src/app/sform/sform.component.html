@@ -1,0 +1,17 @@
+<body *ngIf="this.postType" class="text-center">
+        <form [formGroup]="formAreaInstanceAddForm" class="form-group" (ngSubmit)="search()">
+            <h1 style="text-align: center;" class="h3 mb-3 font-weight-normal">Post to {{postType.name}}</h1>
+            <div *ngFor="let formArea of postType.formAreas">
+                <div *ngIf="formArea.dataType == 'text'">
+                    <input type="text" id="{{formArea.label}}" formControlName="{{formArea.label}}" class="form-control" placeholder="{{formArea.label}}" name="{{formArea.label}}">
+                </div>
+                <div *ngIf="formArea.dataType == 'number'">
+                    <input type="number" id="{{formArea.label}}" formControlName="{{formArea.label}}" class="form-control" placeholder="{{formArea.label}}" name="{{formArea.label}}">
+                </div>
+                <div *ngIf="formArea.dataType == 'date'">
+                    <input type="date" id="{{formArea.label}}" formControlName="{{formArea.label}}" class="form-control" placeholder="{{formArea.label}}" name="{{formArea.label}}">
+                </div>
+            </div>
+            <button type="submit" style="margin-top: 10px;" class="btn btn-success">Search</button>
+        </form>
+    </body>

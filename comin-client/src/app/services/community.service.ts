@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class CommunityService {
 
   private baseUrl = 'http://localhost:8080/communities';
-  private wikiUrl = 'https://www.wikidata.org/w/api.php?action=wbsearchentities&limit=10&language=en&format=json&search=';
+  private wikiUrl = 'https://www.wikidata.org/w/api.php?action=wbsearchentities&limit=50&language=en&format=json&search=';
   constructor(private http: HttpClient) { }
 
   getCommunityById(id: number): Observable<any>{
