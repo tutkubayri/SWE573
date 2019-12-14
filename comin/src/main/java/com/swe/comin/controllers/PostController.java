@@ -1,5 +1,6 @@
 package com.swe.comin.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.swe.comin.models.Post;
 import com.swe.comin.services.PostService;
 import org.springframework.http.ResponseEntity;

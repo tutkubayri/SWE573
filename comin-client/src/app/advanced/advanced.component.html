@@ -1,0 +1,10 @@
+<h5 style="text-align: center;">Which Post Type Do You Want To Search?</h5>
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2" *ngFor="let postType of postTypes">
+                <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/search', postType.id]">{{ postType.name }}</a>
+            </div>
+        </div>
+    </div>
+</div>

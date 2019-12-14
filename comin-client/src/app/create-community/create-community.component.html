@@ -15,10 +15,18 @@
 
     <input type="text" id="semanticTag" formControlName="semanticTag" class="form-control" placeholder="Semantic Tag"
       name="semanticTag">
+    <button type="button" class="btn btn-success" (click)="tagSearch()">Search in WikiData</button>
     <div style="color: red;"
       *ngIf="communityAddForm.get('semanticTag').hasError('required') && communityAddForm.get('semanticTag').dirty">
       "Semantic Tag" input is required.</div>
 
+    <div *ngIf="this.list">
+      <select id="selectedTags" multiple formControlName="selectedTags" class="form-control" name="selectedTags" placeholder="Suggestions from WikiData">
+          <option *ngFor="let tag of this.tags" [value]="tag.qcode + ',' + tag.label">
+            {{tag.label}}
+          </option>
+      </select>
+    </div>
     <input type="text" id="bannerUrl" formControlName="bannerUrl" class="form-control" placeholder="Banner Url"
       name="bannerUrl">
     <div style="color: red;"
@@ -26,5 +34,6 @@
       Url" input is required.</div>
 
     <button type="submit" class="btn btn-success">Create</button>
+    <div style="color: green;" *ngIf="this.submitted">Community is created successfully.</div>
   </form>
 </body>

@@ -7,7 +7,6 @@ import { CommunityService } from '../services/community.service';
 import { PostTypeService } from '../services/postType.service';
 import { Community } from '../community';
 import { FormArea } from '../formArea';
-import { Post } from '../post';
 
 @Component({
   selector: 'app-newPostType.',
@@ -36,6 +35,7 @@ export class NewPostTypeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.submitted = false;
    this.createPostTypeAddForm();
    this.route.params.subscribe(params=>{
     this.communityService.getCommunityById(params.id).subscribe(data => this.community = data)
@@ -55,8 +55,6 @@ export class NewPostTypeComponent implements OnInit {
   }
 
   newPostType(): void {
-    
-        this.submitted = false;
         this.saved = true;
   }
 }

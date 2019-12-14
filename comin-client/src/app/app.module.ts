@@ -13,6 +13,8 @@ import { PostTypesComponent } from './postTypes/postTypes.component';
 import { NewPostTypeComponent } from './newPostType/newPostType.component';
 import { CommunityService } from './services/community.service';
 import { FormAreaComponent } from './form-area/form-area.component';
+import { AdvancedComponent } from './advanced/advanced.component';
+import { SformComponent } from './sform/sform.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { FormAreaComponent } from './form-area/form-area.component';
     PostTypesComponent,
     NewPostTypeComponent,
     FormAreaComponent,
+    AdvancedComponent,
+    SformComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,7 @@ import { FormAreaComponent } from './form-area/form-area.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
   ],
 
   providers: [CommunityService, CommunitiesComponent, CommunityDetailsComponent, CreateCommunityComponent],

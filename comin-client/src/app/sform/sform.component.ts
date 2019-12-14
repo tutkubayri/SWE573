@@ -1,20 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostType } from '../postType';
-import { ActivatedRoute } from '@angular/router';
-import { PostTypeService } from '../services/postType.service';
-import { PostService } from '../services/post.service';
-import { FormGroup, Validators, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import { FormArea } from '../formArea';
-import { Observable } from 'rxjs';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Post } from '../post';
+import { ActivatedRoute } from '@angular/router';
+import { PostService } from '../services/post.service';
+import { PostTypeService } from '../services/postType.service';
 import { FormAreaService } from '../services/form-area.service';
 
 @Component({
-  selector: 'app-postTypes',
-  templateUrl: './postTypes.component.html',
-  styleUrls: ['./postTypes.component.css']
+  selector: 'app-sform',
+  templateUrl: './sform.component.html',
+  styleUrls: ['./sform.component.css']
 })
-export class PostTypesComponent implements OnInit {
+
+export class SformComponent implements OnInit {
 
   @Input() id: number;
   postType: PostType;
@@ -22,7 +21,7 @@ export class PostTypesComponent implements OnInit {
   formAreaInstanceAddForm: FormGroup;
   post: Post;
   submitted = false;
-  jsonVersion: JSON;
+  searchFields: JSON;
 
   constructor(private route: ActivatedRoute, private postTypeService: PostTypeService,
     private postService: PostService, private formBuilder: FormBuilder, private formAreaService: FormAreaService) { }
@@ -51,20 +50,8 @@ export class PostTypesComponent implements OnInit {
       }, error => console.log(error));
   }
 
-  add(){
-    if(this.formAreaInstanceAddForm.valid){
-      let trialPost = {id: null, postText: JSON.stringify(this.formAreaInstanceAddForm.value), postTypeId: this.postType.id};
-      this.post = Object.assign({},trialPost);
-    }
-    this.submitted = true;
-    this.postService.createPost(this.postType.id, this.post)
-      .subscribe(data => {
-        this.post = data;
-        this.newPost();
-      }, error => console.log(error));
-  }
-
-  newPost(): void {
-    this.post = new Post();
+  search(){
+    this.searchFields = Object.assign({}, this.formAreaInstanceAddForm.value);
+    console.log(this.searchFields);
   }
 }

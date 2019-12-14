@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "postTypes")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class PostType extends AuditModel{
+public class PostType{
 
     public PostType() {
     }
