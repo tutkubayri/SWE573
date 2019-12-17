@@ -21,8 +21,8 @@ export class CommunityDetailsComponent implements OnInit {
   pText: JSON;
   pArray: Array<Array<String>>;
   tagArray: Array<Array<String>>;
-  tArray: string[];
-  tarray:string[];
+  tArray: String[];
+  tarray:String[];
   tText: JSON;
 
   constructor(private route: ActivatedRoute, 
@@ -71,20 +71,19 @@ export class CommunityDetailsComponent implements OnInit {
 
   splitValue(){
     this.tagArray = new Array<Array<String>>();
-    this.tArray = new Array<string>();
-    this.tarray = new Array<string>();
+    this.tArray = new Array<String>();
+    this.tarray = new Array<String>();
     this.tText = JSON.parse(this.community.selectedTags);
     for(let j = 0; j<this.tText.length; j++){
       this.tagArray.push(JSON.stringify(this.tText[j]).split(","));
     }
     for(let i = 0; i<this.tagArray.length; i++ ){
       for(let n = 0; n<2; n++){
-        this.tArray.push(this.tagArray[i][n].replace('"', ""));
+        this.tArray.push(this.tagArray[i][n]);
       }
     }
-    for(let i = 1; i<this.tArray.length; i=i+2){
+    for(let i = 1; i<this.tagArray.length; i=i+2){
       this.tarray.push(this.tArray[i]);
     }
-    console.log(this.tarray);
   }
 }

@@ -19,9 +19,13 @@ export class SformComponent implements OnInit {
   postType: PostType;
   formAreas: String [];
   formAreaInstanceAddForm: FormGroup;
-  post: Post;
   submitted = false;
   searchFields: JSON;
+  values: string[];
+  keys: string[];
+  results: Post[];
+  entries: String[];
+  entries2: String[];
 
   constructor(private route: ActivatedRoute, private postTypeService: PostTypeService,
     private postService: PostService, private formBuilder: FormBuilder, private formAreaService: FormAreaService) { }
@@ -32,7 +36,8 @@ export class SformComponent implements OnInit {
     });
     for (let j = 0; j < postType.formAreas.length; j++) {
       this.formAreaInstanceAddForm.addControl(postType.formAreas[j].label, new FormControl('', Validators.required));
-    } 
+    }
+    this.formAreaInstanceAddForm.addControl("selectedTags", new FormControl('', Validators.required));
   }
 
   ngOnInit() {
@@ -52,6 +57,30 @@ export class SformComponent implements OnInit {
 
   search(){
     this.searchFields = Object.assign({}, this.formAreaInstanceAddForm.value);
-    console.log(this.searchFields);
+    console.log(this.formAreaInstanceAddForm.value);
+    this.keys = new Array<string>();
+    this.values = new Array<string>();
+    /* this.entries = new Array<string>();
+    this.entries2 = new Array<string>(); */
+    for(let i = 0; i<Object.values(this.searchFields).length; i++){
+      if(Object.values(this.searchFields)[i] != ""){
+        this.values.push(Object.values(this.searchFields)[i]);
+      }
+    }
+    for(let j = 0; j<Object.keys(this.searchFields).length; j++){
+      if(Object.values(this.searchFields)[j] != ""){
+        this.keys.push(Object.keys(this.searchFields)[j]);
+      }
+    }
+
+    /* for(let k = 0; k<this.values.length; k++){
+      this.entries.push(this.keys[k] + "\":\"" + this.values[k]);
+    } */
+
+    this.postService.searchPost(this.keys, this.values)
+    .subscribe(data => {
+      this.results = data;
+      console.log(this.results);
+    }, error => console.log(error));
   }
 }

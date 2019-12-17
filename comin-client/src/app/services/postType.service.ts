@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 export class PostTypeService {
 
   private baseUrl = 'http://localhost:8080/postTypes';
+  private wikiUrl = 'https://www.wikidata.org/w/api.php?action=wbsearchentities&limit=50&language=en&format=json&search=';
+
   constructor(private http: HttpClient) { }
 
   getPostTypeById(id: number): Observable<any>{
@@ -20,5 +22,9 @@ export class PostTypeService {
 
    getPostTypesList(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
+  }
+
+  tagSearch(tag:string): Observable<any> {
+    return this.http.get(`${this.wikiUrl}${tag}` + `&origin=*`);
   }
 }

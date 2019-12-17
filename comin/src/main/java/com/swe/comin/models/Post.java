@@ -36,12 +36,30 @@ public class Post{
         this.postType = postType;
     }
 
+    public String getSemanticTag() {
+        return semanticTag;
+    }
+
+    public void setSemanticTag(String semanticTag) {
+        this.semanticTag = semanticTag;
+    }
+
+    public String getSelectedTags() {
+        return selectedTags;
+    }
+
+    public void setSelectedTags(String selectedTags) {
+        this.selectedTags = selectedTags;
+    }
+
     public Post() {
     }
 
-    public Post(PostType postType, String postText) {
+    public Post(PostType postType, String postText, String semanticTag, String selectedTags) {
         this.postType = postType;
         this.postText = postText;
+        this.semanticTag = semanticTag;
+        this.selectedTags = selectedTags;
     }
 
     private static final long serialVersionUID = 1L;
@@ -57,5 +75,11 @@ public class Post{
     @JoinColumn(name = "post_type_id", nullable = false)
     @JsonIgnore
     private PostType postType;
+
+    @Column(columnDefinition = "text")
+    private String semanticTag;
+
+    @Column(columnDefinition = "text")
+    private String selectedTags;
 
 }
