@@ -48,6 +48,7 @@
       <div class="card mb-4 shadow-sm">
         <div class="card-body">
           <p class="card-text" *ngFor="let area of stringToJSON(post.postText)">{{area}}</p>
+          <p class="card-text">{{post.selectedTags}}</p>
           <div style="float: right;">
             <img style="margin-right: 10px;" type="button"
               src="https://img.icons8.com/material-sharp/24/000000/edit.png">
