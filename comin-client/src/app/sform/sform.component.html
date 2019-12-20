@@ -1,6 +1,6 @@
 <body *ngIf="this.postType" class="text-center">
     <form [formGroup]="formAreaInstanceAddForm" class="form-group">
-        <h1 style="text-align: center;" class="h3 mb-3 font-weight-normal">Post to {{postType.name}}</h1>
+        <h1 style="text-align: center;" class="h3 mb-3 font-weight-normal">Search in {{postType.name}}</h1>
         <div *ngFor="let formArea of postType.formAreas">
             <div *ngIf="formArea.dataType == 'text'">
                 <input type="text" id="{{formArea.label}}" formControlName="{{formArea.label}}" class="form-control"
@@ -12,6 +12,10 @@
             </div>
             <div *ngIf="formArea.dataType == 'date'">
                 <input type="date" id="{{formArea.label}}" formControlName="{{formArea.label}}" class="form-control"
+                    placeholder="{{formArea.label}}" name="{{formArea.label}}">
+            </div>
+            <div *ngIf="formArea.dataType == 'enum'">
+                <input type="text" id="{{formArea.label}}" formControlName="{{formArea.label}}" class="form-control"
                     placeholder="{{formArea.label}}" name="{{formArea.label}}">
             </div>
         </div>

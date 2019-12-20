@@ -36,8 +36,22 @@
         <div style="color: red;"
             *ngIf="postTypeAddForm.get('usage').hasError('required') && postTypeAddForm.get('usage').dirty">
             "Usage" input is required.</div>
-            <button class="btn btn-success" (click)="save()">Create Post Type</button>
-
+            <input type="text" id="semanticTag" formControlName="semanticTag" class="form-control" placeholder="Semantic Tag"
+            name="semanticTag" style="margin-bottom: 5px;">
+          <button type="button" class="btn btn-success" style="margin-bottom: 5px;" (click)="tagSearch()">Search in WikiData</button>
+          <div style="color: red; margin-bottom: 5px;"
+            *ngIf="postTypeAddForm.get('semanticTag').hasError('required') && postTypeAddForm.get('semanticTag').dirty">
+            "Semantic Tag" input is required.
+          </div>
+          <div *ngIf="this.list" style="margin-bottom: 5px;">
+            <label style="color:cadetblue;"> SELECTED TAGS: {{this.postTypeAddForm.get("selectedTags").value}}</label>
+            <select id="selectedTags" multiple class="ui fluid dropdown" formControlName="selectedTags" class="form-control" name="selectedTags" placeholder="Suggestions from WikiData">
+                <option *ngFor="let tag of this.allTags" [value]="tag.qcode + ',' + tag.label">
+                  {{tag.label}}
+                </option>
+            </select>
+          </div>
+          <button class="btn btn-success" (click)="save()">Create Post Type</button>
         <button *ngIf="saved" class="btn btn-success" [routerLink]="['/formAreas/add', this.postType.id]">Create Form Area</button>
         <div style="color: green;"
         *ngIf="this.submitted">Post type is created successfully.</div>

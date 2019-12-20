@@ -35,9 +35,9 @@ export class SformComponent implements OnInit {
     this.formAreaInstanceAddForm = this.formBuilder.group({
     });
     for (let j = 0; j < postType.formAreas.length; j++) {
-      this.formAreaInstanceAddForm.addControl(postType.formAreas[j].label, new FormControl('', Validators.required));
+      this.formAreaInstanceAddForm.addControl(postType.formAreas[j].label, new FormControl(''));
     }
-    this.formAreaInstanceAddForm.addControl("selectedTags", new FormControl('', Validators.required));
+    this.formAreaInstanceAddForm.addControl("selectedTags", new FormControl(''));
   }
 
   ngOnInit() {
@@ -46,13 +46,6 @@ export class SformComponent implements OnInit {
       this.postTypeService.getPostTypeById(params.id).subscribe(data => this.createFormAreaInstanceAddForm(data));
       });
     
-  }
-
-  getFormAreas(postTypeId:number){
-    this.formAreaService.getFormAreasByPostTypeId(postTypeId)
-      .subscribe(data => {
-        this.formAreas = data;
-      }, error => console.log(error));
   }
 
   search(){

@@ -2,12 +2,9 @@ package com.swe.comin.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-import lombok.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "formArea")
@@ -17,13 +14,15 @@ public class FormArea{
     private static final long serialVersionUID = 1L;
 
     public FormArea() {
+
     }
 
-    public FormArea(String label, String dataType, boolean requirement, PostType postType) {
+    public FormArea(String label, String dataType, boolean requirement, PostType postType, EnumType enumTypeOfForm) {
         this.label = label;
         this.dataType = dataType;
         this.requirement = requirement;
         this.postType = postType;
+        this.enumTypeOfForm = enumTypeOfForm;
     }
 
     public boolean getRequirement() {
@@ -83,5 +82,8 @@ public class FormArea{
     @JoinColumn(name = "postType_id", nullable = false)
     @JsonIgnore
     private PostType postType;
+
+    @OneToOne(mappedBy = "formArea", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private EnumType enumTypeOfForm;
 }
 

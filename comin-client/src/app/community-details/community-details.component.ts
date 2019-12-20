@@ -20,6 +20,7 @@ export class CommunityDetailsComponent implements OnInit {
   postTypes: Observable<PostType[]>;
   pText: JSON;
   pArray: Array<Array<String>>;
+  postArray: Array<Array<String>>;
   tagArray: Array<Array<String>>;
   tArray: String[];
   tarray:String[];
@@ -43,7 +44,7 @@ export class CommunityDetailsComponent implements OnInit {
     this.pText = JSON.parse(postText);
     this.pArray = new Array<Array<String>>();
     for(let i = 0; i<Object.values(this.pText).length; i++){
-      this.pArray.push([JSON.stringify(Object.keys(this.pText)[i]) + ": " + JSON.stringify(Object.values(this.pText)[i])]);
+      this.pArray.push([JSON.stringify(Object.keys(this.pText)[i]).replace('"', '').replace('"', '') + ": " + JSON.stringify(Object.values(this.pText)[i]).replace('"', '').replace('"', '')]);
     }
     return this.pArray;
   }
@@ -53,7 +54,6 @@ export class CommunityDetailsComponent implements OnInit {
       { name: this.community.name, description: this.community.description, semanticTag: this.community.semanticTag, bannerUrl: this.community.bannerUrl })
       .subscribe(
         data => {
-          console.log(data);
           this.community = data as Community;
         },
         error => console.log(error));
@@ -63,7 +63,6 @@ export class CommunityDetailsComponent implements OnInit {
     this.communityService.deleteCommunity(this.community.id)
       .subscribe(
         data => {
-          console.log(data);
           this.listComponent.reloadData();
         },
         error => console.log(error));
@@ -74,7 +73,7 @@ export class CommunityDetailsComponent implements OnInit {
     this.tArray = new Array<String>();
     this.tarray = new Array<String>();
     this.tText = JSON.parse(this.community.selectedTags);
-    for(let j = 0; j<this.tText.length; j++){
+    for(let j = 0; j<Object.keys(this.tText).length; j++){
       this.tagArray.push(JSON.stringify(this.tText[j]).split(","));
     }
     for(let i = 0; i<this.tagArray.length; i++ ){
@@ -83,7 +82,7 @@ export class CommunityDetailsComponent implements OnInit {
       }
     }
     for(let i = 1; i<this.tagArray.length; i=i+2){
-      this.tarray.push(this.tArray[i]);
+      this.tarray.push(this.tArray[i].replace('"', ''));
     }
   }
 }

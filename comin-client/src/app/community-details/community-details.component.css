@@ -1,0 +1,11 @@
+.container {
+    max-width: 960px;
+  }
+
+  .card-deck .card {
+    max-width: 284px;
+  }
+
+  #post {
+    min-width: 400px;
+  }

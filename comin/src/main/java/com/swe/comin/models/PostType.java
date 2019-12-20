@@ -18,12 +18,14 @@ public class PostType{
     public PostType() {
     }
 
-    public PostType(String name, String usage, Community community, Set<FormArea> formAreas, Set<Post> posts) {
+    public PostType(String name, String usage, Community community, Set<FormArea> formAreas, Set<Post> posts, String semanticTag, String selectedTags) {
         this.name = name;
         this.usage = usage;
         this.community = community;
         this.formAreas = formAreas;
         this.posts = posts;
+        this.semanticTag = semanticTag;
+        this.selectedTags = selectedTags;
     }
 
     public Long getId() {
@@ -74,6 +76,22 @@ public class PostType{
         this.posts = posts;
     }
 
+    public String getSemanticTag() {
+        return semanticTag;
+    }
+
+    public void setSemanticTag(String semanticTag) {
+        this.semanticTag = semanticTag;
+    }
+
+    public String getSelectedTags() {
+        return selectedTags;
+    }
+
+    public void setSelectedTags(String selectedTags) {
+        this.selectedTags = selectedTags;
+    }
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -96,5 +114,11 @@ public class PostType{
 
     @OneToMany(mappedBy = "postType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Post> posts;
+
+    @Column(columnDefinition = "text")
+    private String semanticTag;
+
+    @Column(columnDefinition = "text")
+    private String selectedTags;
 }
 
