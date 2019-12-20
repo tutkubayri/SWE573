@@ -9,6 +9,7 @@ import { PostType } from '../postType';
 import { NewPostTypeService } from '../services/newPostType.service';
 import { FormArea } from '../formArea';
 import { FormAreaService } from '../services/form-area.service';
+import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'create-community',
@@ -36,6 +37,7 @@ export class CreateCommunityComponent implements OnInit {
   defaultPostType: PostType;
   formAreaName: FormArea;
   formAreaDescription: FormArea;
+  redirect = false;
 
   createCommunityAddForm() {
     this.communityAddForm = this.formBuilder.group({
@@ -80,6 +82,7 @@ export class CreateCommunityComponent implements OnInit {
             }, error => console.log(error));
           }, error => console.log(error));
         }, error => console.log(error));
+        this.redirect = true;
       this.wait();
     }
     else {
