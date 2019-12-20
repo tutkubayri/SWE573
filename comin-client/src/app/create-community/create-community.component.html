@@ -21,17 +21,11 @@
       "Semantic Tag" input is required.</div>
 
     <div *ngIf="this.list">
-      <!-- <select id="selectedTags" multiple formControlName="selectedTags" class="form-control" name="selectedTags" placeholder="Suggestions from WikiData">
+      <select id="selectedTags" multiple class="ui fluid dropdown" formControlName="selectedTags" class="form-control" name="selectedTags" placeholder="Suggestions from WikiData">
           <option *ngFor="let tag of this.tags" [value]="tag.qcode + ',' + tag.label">
             {{tag.label}}
           </option>
-      </select> -->
-      <mat-form-field>
-        <mat-label>Toppings</mat-label>
-        <mat-select id="selectedTags" multiple formControlName="selectedTags" class="form-control" name="selectedTags" placeholder="Suggestions from WikiData" multiple>
-          <mat-option *ngFor="let tag of this.tags" [value]="tag.qcode + ',' + tag.label">{{tag.label}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+      </select>
     </div>
 
     

@@ -5,6 +5,10 @@ import { Community } from '../community';
 import { WikiData } from '../wikiData';
 import { stringify } from 'querystring';
 import { Router } from '@angular/router';
+import { PostType } from '../postType';
+import { NewPostTypeService } from '../services/newPostType.service';
+import { FormArea } from '../formArea';
+import { FormAreaService } from '../services/form-area.service';
 
 @Component({
   selector: 'create-community',
@@ -15,7 +19,8 @@ export class CreateCommunityComponent implements OnInit {
 
   submitted = false;
 
-  constructor(private communityService: CommunityService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private communityService: CommunityService, private formBuilder: FormBuilder, private router: Router,
+    private postTypeService: NewPostTypeService, private formAreaService: FormAreaService) { }
 
   communityAddForm: FormGroup;
   community: Community = new Community();
@@ -27,6 +32,12 @@ export class CreateCommunityComponent implements OnInit {
   arr: string[];
   tags: WikiData[];
   error = false;
+  defaultPostType: PostType;
+  formAreaName: FormArea;
+  formAreaDescription: FormArea;
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings = {};
 
   createCommunityAddForm() {
     this.communityAddForm = this.formBuilder.group({
@@ -36,12 +47,22 @@ export class CreateCommunityComponent implements OnInit {
       selectedTags: ["", Validators.required],
       //selectedQ:["",Validators.required], 
       bannerUrl: ["", Validators.required]
+
     });
   }
 
   ngOnInit() {
     this.submitted = false;
     this.createCommunityAddForm();
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      text: "Select Tags",
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      enableSearchFilter: true,
+      classes: "myclass custom-class"
+    };
   }
 
   add() {
@@ -57,6 +78,18 @@ export class CreateCommunityComponent implements OnInit {
       this.communityService.createCommunity(this.community)
         .subscribe(data => {
           this.community = data['community'];
+          let dPostType = { id: null, name: "Default Post Type", usage: "Default Post Type", communityId: null };
+          this.postTypeService.createPostType(dPostType, data['id']).subscribe(data2 => {
+            this.defaultPostType = data2['defaultPostType'];
+            let dFormAreaName = { id: null, label: "Name", dataType: "text", requirement: "true", post_type_id: null };
+            this.formAreaService.createFormArea(dFormAreaName, data2['id']).subscribe(data3 => {
+              this.formAreaName = data3['formAreaName'];
+              let dFormAreaDescription = { id: null, label: "Desciption", dataType: "text", requirement: "true", post_type_id: null };
+              this.formAreaService.createFormArea(dFormAreaDescription, data2['id']).subscribe(data4 => {
+                this.formAreaDescription = data4['formAreaDescription'];
+              }, error => console.log(error));
+            }, error => console.log(error));
+          }, error => console.log(error));
         }, error => console.log(error));
       this.wait();
     }
@@ -80,7 +113,7 @@ export class CreateCommunityComponent implements OnInit {
     for (let tagGroup of this.arr) {
       this.tagArray = null;
       this.communityService.tagSearch(tagGroup).subscribe(data => {
-      this.tagArray = data;
+        this.tagArray = data;
         this.list = true;
         this.suggestionTags = new Array<WikiData>();
         this.tags = new Array<WikiData>();
@@ -89,10 +122,43 @@ export class CreateCommunityComponent implements OnInit {
           this.suggestionTags[i].label = Object.values(Object.entries(Object.entries(this.tagArray)[1])[1][1][i])[6].toString();
           this.suggestionTags[i].qcode = Object.values(Object.entries(Object.entries(this.tagArray)[1])[1][1][i])[1].toString();
           //console.log(JSON.stringify(this.suggestionTags[i]));
-          this.tags.push(this.suggestionTags[i]);
+          //this.tags.push(this.suggestionTags[i]);
           //console.log(JSON.stringify(this.tags[i]));
+        }
+        this.tags = new Array<WikiData>();
+        this.tags.push(this.suggestionTags[0]);
+        let count = 0;
+        for (let j = 0; j < this.suggestionTags.length; j++) {
+          count = 0;
+          for (let k = 0; k < this.suggestionTags.length; k++) {
+            if (j != k) {
+              if (this.suggestionTags[j].label != this.suggestionTags[k].label) {
+                count = count + 1;
+              }
+            }
+          }
+          if (count == this.suggestionTags.length - 1) {
+            this.tags.push(this.suggestionTags[j]);
+          }
         }
       }, error => console.log(error));
     }
+    this.dropdownList = this.tags;
   }
+
+  onItemSelect(item: any) {
+    console.log(item);
+    console.log(this.selectedItems);
+  }
+  OnItemDeSelect(item: any) {
+    console.log(item);
+    console.log(this.selectedItems);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+  onDeSelectAll(items: any) {
+    console.log(items);
+  }
+
 }

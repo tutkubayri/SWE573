@@ -46,7 +46,6 @@ export class CommunityDetailsComponent implements OnInit {
     for(let i = 0; i<Object.values(this.pText).length; i++){
       this.pArray.push([JSON.stringify(Object.keys(this.pText)[i]).replace('"', '').replace('"', '') + ": " + JSON.stringify(Object.values(this.pText)[i]).replace('"', '').replace('"', '')]);
     }
-    console.log(this.pArray);
     return this.pArray;
   }
 
@@ -55,7 +54,6 @@ export class CommunityDetailsComponent implements OnInit {
       { name: this.community.name, description: this.community.description, semanticTag: this.community.semanticTag, bannerUrl: this.community.bannerUrl })
       .subscribe(
         data => {
-          console.log(data);
           this.community = data as Community;
         },
         error => console.log(error));
@@ -65,7 +63,6 @@ export class CommunityDetailsComponent implements OnInit {
     this.communityService.deleteCommunity(this.community.id)
       .subscribe(
         data => {
-          console.log(data);
           this.listComponent.reloadData();
         },
         error => console.log(error));
