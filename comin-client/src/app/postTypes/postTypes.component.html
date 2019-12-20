@@ -1,5 +1,5 @@
 <body *ngIf="this.postType" class="text-center">
-    <form [formGroup]="formAreaInstanceAddForm" class="form-group" (ngSubmit)="add()">
+    <form [formGroup]="formAreaInstanceAddForm" class="form-group" (ngSubmit)="add(this.postType)">
         <h1 style="text-align: center;" class="h3 mb-3 font-weight-normal">Post to {{postType.name}}</h1>
         <div *ngFor="let formArea of postType.formAreas">
             <div *ngIf="formArea.dataType == 'text'">
@@ -15,26 +15,37 @@
                     placeholder="{{formArea.label}}" name="{{formArea.label}}">
             </div>
         </div>
-        <form [formGroup]="tagForm" class="form-group">
-        <input type="text" id="semanticTag" formControlName="semanticTag" class="form-control"
-            placeholder="Semantic Tag" name="semanticTag">
-        <button type="button" class="btn btn-success" (click)="tagSearch()">Search in WikiData</button>
-        <div style="color: red;"
-            *ngIf="tagForm.get('semanticTag').hasError('required') && tagForm.get('semanticTag').dirty">
-            "Semantic Tag" input is required.</div>
-
-        <div *ngIf="this.list">
-            <select id="selectedTags" multiple formControlName="selectedTags" class="form-control" name="selectedTags"
-                placeholder="Suggestions from WikiData">
-                <option *ngFor="let tag of this.tags" [value]="tag.qcode + ',' + tag.label">
-                    {{tag.label}}
+        <div *ngFor="let enum of this.valueSplitArray; let i = index ">
+            <label>{{this.labelOfEnums[i]}}</label>
+            <select id="{{this.labelOfEnums[i]}}" formControlName="{{this.labelOfEnums[i]}}" class="form-control" 
+            name="{{this.labelOfEnums[i]}}">
+                <option *ngFor="let option of enum" [value]="option" >
+                    {{option}}
                 </option>
             </select>
         </div>
-    </form>
+        <form [formGroup]="tagForm" class="form-group">
+            <input type="text" id="semanticTag" formControlName="semanticTag" class="form-control"
+                placeholder="Semantic Tag" name="semanticTag">
+            <button type="button" class="btn btn-success" (click)="tagSearch()">Search in WikiData</button>
+            <div style="color: red;"
+                *ngIf="tagForm.get('semanticTag').hasError('required') && tagForm.get('semanticTag').dirty">
+                "Semantic Tag" input is required.</div>
+
+            <div *ngIf="this.list">
+                <select id="selectedTags" multiple formControlName="selectedTags" class="form-control"
+                    name="selectedTags" placeholder="Suggestions from WikiData">
+                    <option *ngFor="let tag of this.tags" [value]="tag.qcode + ',' + tag.label">
+                        {{tag.label}}
+                    </option>
+                </select>
+            </div>
+        </form>
         <div>
             <button type="submit" style="margin-top: 10px;" class="btn btn-success">Post</button>
             <div style="color: green;" *ngIf="this.submitted">Post is created successfully.</div>
+            <div style="color: red;" *ngIf="this.error">Post type is not created. Fill the required areas.</div>
+            <div style="color:mediumturquoise;" *ngIf="this.redirect">Redirecting to Communities page...</div>
         </div>
     </form>
 </body>

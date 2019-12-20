@@ -1,3 +1,5 @@
+import { Enum } from './enum';
+
 export class FormArea
  {
     id: number;
@@ -5,4 +7,5 @@ export class FormArea
     dataType: string;
     postTypeId: number;
     requirement: Boolean;
+    enum: Enum;
 }

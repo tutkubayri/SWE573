@@ -36,6 +36,7 @@ public class PostController {
     public List<Post> searchResults(@PathVariable (value="keys") String[] keys, @PathVariable (value="values") String[] values){
         return postService.searchResults(keys, values);
     }
+    
 
     /*@RequestMapping(value = "/jdbc")
 

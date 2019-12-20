@@ -21,12 +21,20 @@
       "Semantic Tag" input is required.</div>
 
     <div *ngIf="this.list">
-      <select id="selectedTags" multiple formControlName="selectedTags" class="form-control" name="selectedTags" placeholder="Suggestions from WikiData">
+      <!-- <select id="selectedTags" multiple formControlName="selectedTags" class="form-control" name="selectedTags" placeholder="Suggestions from WikiData">
           <option *ngFor="let tag of this.tags" [value]="tag.qcode + ',' + tag.label">
             {{tag.label}}
           </option>
-      </select>
+      </select> -->
+      <mat-form-field>
+        <mat-label>Toppings</mat-label>
+        <mat-select id="selectedTags" multiple formControlName="selectedTags" class="form-control" name="selectedTags" placeholder="Suggestions from WikiData" multiple>
+          <mat-option *ngFor="let tag of this.tags" [value]="tag.qcode + ',' + tag.label">{{tag.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
+
+    
     <input type="text" id="bannerUrl" formControlName="bannerUrl" class="form-control" placeholder="Banner Url"
       name="bannerUrl">
     <div style="color: red;"
@@ -35,5 +43,6 @@
 
     <button type="submit" class="btn btn-success">Create</button>
     <div style="color: green;" *ngIf="this.submitted">Community is created successfully.</div>
+    <div style="color: red;" *ngIf="this.error">Community is not created.</div>
   </form>
 </body>

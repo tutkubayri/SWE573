@@ -1,7 +1,7 @@
 <div *ngIf="this.community" class="row mb-5">
   <div class="col-lg-9 mx-auto">
     <div class="col-lg-5">
-      <img [src]="community.bannerUrl" style="width: 200px; height: 100px;float: left; margin-right: 15px;" />
+      <img [src]="community.bannerUrl" style="width: 400px; height: 200px;float: left; margin-right: 15px;" />
     </div>
     <div class="col-lg-4" style="float: left;">
       <div style="margin-bottom: 10px;">
@@ -13,51 +13,32 @@
       <div>
         <label>Selected Tag(s): </label> {{this.tarray}}
       </div>
-    
+
 
       <!-- <span class="button is-small btn-primary" *ngIf='community.active' (click)='updateActive(false)'>Inactive</span>
   <span class="button is-small btn-primary" *ngIf='!community.active' (click)='updateActive(true)'>Active</span> -->
 
       <button type="button" class="btn btn-sm btn-outline-secondary" style="margin-right: 10px;"
         [routerLink]="['/postTypes/add', community.id]">Create New Post Type</button>
-      <button class="btn btn-sm btn-danger" (click)='deleteCommunity()'>Delete Community</button>
     </div>
   </div>
-
-  <div class="col-lg-9 mx-auto" style="margin-top: 10px" >
-    <h3>Post Types</h3>
-    <div class="col-md-4" *ngFor="let postType of community.postTypes" style="float: left; height:max-content">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-          <p class="card-text"><b>{{postType.name}}</b></p>
-          <p class="card-text">Usage: {{postType.usage}}</p>
-          <div style="float: right;">
-            <img style="margin-right: 10px;" type="button"
-              src="https://img.icons8.com/material-sharp/24/000000/edit.png">
-            <img type="button" [routerLink]="['/posts/add', community.id]"
-              src="https://img.icons8.com/office/24/000000/plus-2-math.png">
+  <div class="container album py-5" style="padding: 20px;">
+    <div class="row" *ngFor="let postType of community.postTypes">
+      <div class="card mb-6 shadow-sm" style="background-color:white; padding: 10px; margin-bottom: 5px;">
+        <h6 class="my-0 font-weight-small"><b>{{postType.name}}</b></h6>
+        <p> Usage: {{postType.usage}}
+          <img style="float: rigth;" type="button" [routerLink]="['/posts/add', postType.id]"
+            src="https://img.icons8.com/office/24/000000/plus-2-math.png"></p>
           </div>
+      </div>
+    </div>
+  <div class="container album py-5 bg-light" style="padding: 20px;">
+    <div class="row" *ngFor="let postType of community.postTypes">
+      <div class="col-md-6" *ngFor="let post of postType.posts">
+        <div class="card mb-6 shadow-sm" style="background-color:white; padding: 10px; margin-bottom: 5px; height: 166px;">
+            <p *ngFor="let area of stringToJSON(post.postText)">{{area}}</p>
+            <p>Tags: {{post.selectedTags}}</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-lg-9 mx-auto">
-  <h3>Posts</h3>
-  <div class="col-lg-9 mx-auto" *ngFor="let postType of community.postTypes" style="margin-top: 10px">
-    <div class="col-md-4" *ngFor="let post of postType.posts" style="float: left; height:max-content">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-          <p class="card-text" *ngFor="let area of stringToJSON(post.postText)">{{area}}</p>
-          <p class="card-text">{{post.selectedTags}}</p>
-          <div style="float: right;">
-            <img style="margin-right: 10px;" type="button"
-              src="https://img.icons8.com/material-sharp/24/000000/edit.png">
-            <img type="button" [routerLink]="['/postTypes', postType.id]"
-              src="https://img.icons8.com/office/24/000000/plus-2-math.png">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-</div>

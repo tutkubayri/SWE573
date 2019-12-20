@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostType } from '../postType';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { PostTypeService } from '../services/postType.service';
 import { PostService } from '../services/post.service';
 import { FormGroup, Validators, FormBuilder, FormArray, FormControl } from '@angular/forms';
@@ -9,6 +9,9 @@ import { Observable } from 'rxjs';
 import { Post } from '../post';
 import { FormAreaService } from '../services/form-area.service';
 import { WikiData } from '../wikiData';
+import { Community } from '../community';
+import { filter, pairwise } from 'rxjs/operators';
+import { Enum } from '../enum';
 
 @Component({
   selector: 'app-postTypes',
@@ -32,8 +35,15 @@ export class PostTypesComponent implements OnInit {
   tags: WikiData[];
   importTag: WikiData;
   list = false;
+  error = false;
+  redirect = false;
+  communityId: number;
+  enumArray: Array<Enum>;
+  enumValueArray: Array<string>;
+  valueSplitArray: Array<Array<string>>;
+  labelOfEnums: Array<string>;
 
-  constructor(private route: ActivatedRoute, private postTypeService: PostTypeService,
+  constructor(private route: ActivatedRoute, private postTypeService: PostTypeService, private router: Router,
     private postService: PostService, private formBuilder: FormBuilder, private formAreaService: FormAreaService) { }
 
   createFormAreaInstanceAddForm(postType: PostType) {
@@ -43,26 +53,51 @@ export class PostTypesComponent implements OnInit {
       selectedTags:["",Validators.required],
     })
     this.formAreaInstanceAddForm = this.formBuilder.group({
-      
     });
     for (let j = 0; j < postType.formAreas.length; j++) {
-      this.formAreaInstanceAddForm.addControl(postType.formAreas[j].label, new FormControl('', Validators.required));
-    } 
+      if(postType.formAreas[j].requirement == true){
+        this.formAreaInstanceAddForm.addControl(postType.formAreas[j].label, new FormControl('', Validators.required));
+      }
+      else{
+        this.formAreaInstanceAddForm.addControl(postType.formAreas[j].label, new FormControl());
+      }
+    }
+    this.getEnums(postType.formAreas);
   }
 
   ngOnInit() {
     this.submitted = false;
     this.route.params.subscribe(params=>{
-      this.postTypeService.getPostTypeById(params.id).subscribe(data => this.createFormAreaInstanceAddForm(data));
+      this.postTypeService.getPostTypeById(params.id).subscribe(
+        data => this.createFormAreaInstanceAddForm(data));
       });
-    
   }
 
-  getFormAreas(postTypeId:number){
-    this.formAreaService.getFormAreasByPostTypeId(postTypeId)
-      .subscribe(data => {
-        this.formAreas = data;
-      }, error => console.log(error));
+  getEnums(formAreas: Array<FormArea>){
+    this.enumArray = new Array<Enum>();
+    this.labelOfEnums = new Array<string>();
+    for(let a = 0; a<formAreas.length; a++){
+      if(formAreas[a].dataType == "enum"){
+        this.labelOfEnums.push(formAreas[a].label);
+        this.formAreaService.getEnumByFormAreaId(formAreas[a].id)
+        .subscribe(data => {
+          this.enumArray.push(data);
+          this.getEnumValues(this.enumArray);
+          }
+        , error => console.log(error))
+      }
+    }
+  }
+
+  getEnumValues(e: Array<Enum>){
+    this.enumValueArray = new Array<string>();
+    this.valueSplitArray = new Array<Array<string>>();
+    for(let i = 0; i<e.length; i++){
+      this.enumValueArray.push(e[i][0].value);
+    }
+    for(let j = 0; j<this.enumValueArray.length; j++){
+      this.valueSplitArray.push(this.enumValueArray[j].split(';'));
+    }
   }
 
   tagSearch(){
@@ -90,16 +125,32 @@ export class PostTypesComponent implements OnInit {
       let trialPost = {id: null, postText: JSON.stringify(this.formAreaInstanceAddForm.value), postTypeId: this.postType.id,
       semanticTag: JSON.stringify(this.tagForm.get("semanticTag").value), selectedTags: JSON.stringify(this.tagForm.get("selectedTags").value)};
       this.post = Object.assign({},trialPost);
-    }
-    this.submitted = true;
-    this.postService.createPost(this.postType.id, this.post)
-      .subscribe(data => {
+      this.error = false;
+      this.submitted = true;
+      this.postService.createPost(this.postType.id, this.post)
+        .subscribe(data => {
         this.post = data;
         this.newPost();
+        this.redirect = true;
+        this.wait()
       }, error => console.log(error));
+    }
+      else{
+        this.error = true;
+      }
   }
 
   newPost(): void {
     this.post = new Post();
   }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async wait() {
+      await this.delay(3000);
+      this.redirect = false;
+      this.router.navigateByUrl('/communities');
+    }
 }

@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class FormAreaService {
 
   private baseUrl = 'http://localhost:8080/formAreas';
+  private enumBaseUrl = 'http://localhost:8080/enums';
 
   constructor(private http: HttpClient) { }
 
@@ -15,7 +16,11 @@ export class FormAreaService {
     return this.http.post(`${this.baseUrl}/add/${id}`, formArea);
   }
 
-  getFormAreasByPostTypeId(id: number): Observable<any>{
-    return this.http.get(`${this.baseUrl}/${id}`);
+  createEnum(enumOfForm: Object, id: number): Observable<Object>{
+    return this.http.post(`${this.baseUrl}/enum/${id}`, enumOfForm);
+  }
+
+  getEnumByFormAreaId(id: number): Observable<any>{
+    return this.http.get(`${this.enumBaseUrl}/${id}`);
    }
 }

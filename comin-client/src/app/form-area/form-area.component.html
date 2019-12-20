@@ -6,22 +6,41 @@
         <div formArrayName="formAreas" *ngFor="let item of formAddForm.get('formAreas').controls; let i = index;"
             style="margin-bottom: 10px;">
             <div [formGroupName]="i">
+                <label>Label: </label>
                 <input type="text" id="label" formControlName="label" class="form-control" placeholder="Label"
                     name="label">
+                <label>Data Type: </label>
                 <select type="text" id="dataType" formControlName="dataType" class="form-control" name="dataType"
-                    placeholder="Data Type" matNativeControl required>
+                    matNativeControl required>
                     <option value="text">Text</option>
                     <option value="number">Number</option>
                     <option value="date">Date</option>
+                    <option value="enum">Enum</option>
                     <option value="image">Image</option>
                     <option value="video">Video</option>
                 </select>
-                <input type="checkbox" id="requirement" formControlName="requirement" class="form-control" name="requirement">
+                <label>Requirement: </label>
+                <select id="requirement" formControlName="requirement" class="form-control" name="requirement">
+                    <option>true</option>
+                    <option>false</option>
+                </select>
             </div>
+        </div>
+        <div *ngIf="this.enum">
+            <form [formGroup]="enumForm" class="form-group">
+                <label>Enum values (Separate them with ';'): </label>
+                <div *ngFor="let control of this.nameOfControls">
+                    <input type="text" id="{{control}}" formControlName="{{control}}" class="form-control" placeholder="{{control}}"
+                        name="{{control}}">
+                </div>
+                <button class="btn btn-success" (click)="saveEnumValues(this.idList, this.nameOfControls)">Save</button>
+            </form>
         </div>
         <button class="btn btn-success" (click)="addFormArea()">Add Form Area</button>
         <button class="btn btn-success" (click)="add()">Create</button>
-        <div style="color: green;"
-        *ngIf="this.submitted">Form area(s) created successfully.</div>
+        <div style="color: green;" *ngIf="this.submitted">Form area(s) created successfully.</div>
+        <div style="color: green;" *ngIf="this.enumSubmitted">Enum(s) created successfully.</div>
+        <div style="color: red;" *ngIf="this.error">Form area(s) not created.</div>
+        <div style="color:mediumturquoise;" *ngIf="this.redirect">Redirecting to Communities page...</div>
     </form>
 </div>

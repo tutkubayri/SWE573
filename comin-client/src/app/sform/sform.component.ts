@@ -48,13 +48,6 @@ export class SformComponent implements OnInit {
     
   }
 
-  getFormAreas(postTypeId:number){
-    this.formAreaService.getFormAreasByPostTypeId(postTypeId)
-      .subscribe(data => {
-        this.formAreas = data;
-      }, error => console.log(error));
-  }
-
   search(){
     this.searchFields = Object.assign({}, this.formAreaInstanceAddForm.value);
     console.log(this.formAreaInstanceAddForm.value);

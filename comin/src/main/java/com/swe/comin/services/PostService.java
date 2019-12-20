@@ -52,35 +52,52 @@ public class PostService {
         for (int n = 0; n < rArray.size(); n++) {
             rArray.clear();
         }
-        for (int i = 0; i < keys.length; i++) {
-            System.out.println(keys[i]);
-            if (keys[i].contains("selectedTags")) {
+
+        if(keys[0].contains("selectedTags")){
+            String search = values[0];
+            resultArray = postRepository.findBySelectedTagsContaining(search);
+            for(int a = 0; a<resultArray.size(); a++){
+                rArray.add(resultArray.get(a));
+            }
+        }else{
+            String search = values[0];
+            resultArray = postRepository.findByPostTextContaining(search);
+            for(int b = 0; b<resultArray.size(); b++){
+                rArray.add(resultArray.get(b));
+            }
+        }
+
+        for (int i = 1; i < keys.length; i++) {
+            if (!keys[i].contains("selectedTags")) {
                 String search = values[i];
+                resultArray = postRepository.findByPostTextContaining("...");
+                resultArray = postRepository.findByPostTextContaining(search);
+                if(resultArray.size() != 0){
+                    for (int k = 0; k < resultArray.size(); k++) {
+                        for (int n = 0; n < rArray.size(); n++) {
+                            if (resultArray.get(k) != rArray.get(n)) {
+                                rArray.remove(n);
+                            }
+                        }
+                    }
+                }else {
+                    rArray.clear();
+                }
+            } else {
+                String search = values[i];
+                resultArray = postRepository.findBySelectedTagsContaining("...");
                 resultArray = postRepository.findBySelectedTagsContaining(search);
-                for (int d = 0; d < resultArray.size(); d++) {
-                    if (rArray.size() != 0) {
+                if(resultArray.size() != 0){
+                    for (int d = 0; d < resultArray.size(); d++) {
                         for (int m = 0; m < rArray.size(); m++) {
                             if (resultArray.get(d) != rArray.get(m)) {
                                 rArray.remove(m);
                             }
                         }
-                    } else {
-                        rArray.add(resultArray.get(d));
                     }
                 }
-            } else {
-                String search = values[i];
-                resultArray = postRepository.findByPostTextContaining(search);
-                for (int k = 0; k < resultArray.size(); k++) {
-                    if (rArray.size() != 0) {
-                        for (int m = 0; m < rArray.size(); m++) {
-                            if (resultArray.get(k) != rArray.get(m)) {
-                                rArray.remove(m);
-                            }
-                        }
-                    } else {
-                        rArray.add(resultArray.get(k));
-                    }
+                else{
+                    rArray.clear();
                 }
             }
         }
