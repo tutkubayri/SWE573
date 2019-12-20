@@ -30,6 +30,7 @@ export class NewPostTypeComponent implements OnInit {
   tags: WikiData[];
   importTag: WikiData;
   list = false;
+  allTags: WikiData[];
 
   constructor(private route: ActivatedRoute, private communityService: CommunityService,
     private newPostTypeService: NewPostTypeService, private formBuilder: FormBuilder,
@@ -68,7 +69,7 @@ export class NewPostTypeComponent implements OnInit {
         this.saved = true;
   }
 
-  tagSearch() {
+  tagSearch(){
     this.arr = this.postTypeAddForm.get("semanticTag").value.split(" ");
     this.arr.push(this.postTypeAddForm.get("semanticTag").value);
     for (let tagGroup of this.arr) {
@@ -77,7 +78,6 @@ export class NewPostTypeComponent implements OnInit {
         this.tagArray = data;
         this.list = true;
         this.suggestionTags = new Array<WikiData>();
-        this.tags = new Array<WikiData>();
         for (let i = 0; i < Object.entries(this.tagArray)[1][1].length; i++) {
           this.suggestionTags[i] = Object.assign({});
           this.suggestionTags[i].label = Object.values(Object.entries(Object.entries(this.tagArray)[1])[1][1][i])[6].toString();
@@ -99,8 +99,20 @@ export class NewPostTypeComponent implements OnInit {
           if (tagCount == this.tags.length) {
             this.tags.push(this.suggestionTags[j]);
           }
-        }
+        } 
+        //console.log(this.tags);
+        this.all(this.tags);
+        
       }, error => console.log(error));
+    }
+  }
+
+  all(ts: Array<WikiData>){
+    console.log(ts);
+    let arrayWikiData = new Array<WikiData>();
+    arrayWikiData = ts;
+    for(let n = 1; n<arrayWikiData.length; n++){
+      this.allTags.push(ts[n]);
     }
   }
 }

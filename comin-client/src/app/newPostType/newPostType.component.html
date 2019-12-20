@@ -46,7 +46,7 @@
           <div *ngIf="this.list" style="margin-bottom: 5px;">
             <label style="color:cadetblue;"> SELECTED TAGS: {{this.postTypeAddForm.get("selectedTags").value}}</label>
             <select id="selectedTags" multiple class="ui fluid dropdown" formControlName="selectedTags" class="form-control" name="selectedTags" placeholder="Suggestions from WikiData">
-                <option *ngFor="let tag of this.tags" [value]="tag.qcode + ',' + tag.label">
+                <option *ngFor="let tag of this.allTags" [value]="tag.qcode + ',' + tag.label">
                   {{tag.label}}
                 </option>
             </select>
