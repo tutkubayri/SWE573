@@ -100,23 +100,39 @@ export class PostTypesComponent implements OnInit {
     }
   }
 
-  tagSearch(){
+  tagSearch() {
     this.arr = this.tagForm.get("semanticTag").value.split(" ");
     this.arr.push(this.tagForm.get("semanticTag").value);
-    for(let tagGroup of this.arr){
+    for (let tagGroup of this.arr) {
       this.tagArray = null;
-      this.postTypeService.tagSearch(tagGroup).subscribe(data => {this.tagArray = data;
-      this.list = true;
-      this.suggestionTags = new Array<WikiData>();
-      this.tags = new Array<WikiData>();
-      for(let i=0; i<Object.entries(this.tagArray)[1][1].length; i++){        
-        this.suggestionTags[i] = Object.assign({});
-        this.suggestionTags[i].label = Object.values(Object.entries(Object.entries(this.tagArray)[1])[1][1][i])[6].toString();
-        this.suggestionTags[i].qcode = Object.values(Object.entries(Object.entries(this.tagArray)[1])[1][1][i])[1].toString();
-        //console.log(JSON.stringify(this.suggestionTags[i]));
-        this.tags.push(this.suggestionTags[i]);
-        //console.log(JSON.stringify(this.tags[i]));
-      }}, error => console.log(error));
+      this.postTypeService.tagSearch(tagGroup).subscribe(data => {
+        this.tagArray = data;
+        this.list = true;
+        this.suggestionTags = new Array<WikiData>();
+        this.tags = new Array<WikiData>();
+        for (let i = 0; i < Object.entries(this.tagArray)[1][1].length; i++) {
+          this.suggestionTags[i] = Object.assign({});
+          this.suggestionTags[i].label = Object.values(Object.entries(Object.entries(this.tagArray)[1])[1][1][i])[6].toString();
+          this.suggestionTags[i].qcode = Object.values(Object.entries(Object.entries(this.tagArray)[1])[1][1][i])[1].toString();
+          //console.log(JSON.stringify(this.suggestionTags[i]));
+          //this.tags.push(this.suggestionTags[i]);
+          //console.log(JSON.stringify(this.tags[i]));
+        }
+        this.tags = new Array<WikiData>();
+        this.tags.push(this.suggestionTags[0]);
+        let tagCount = 0;
+        for (let j = 0; j < this.suggestionTags.length; j++) {
+          tagCount = 0;
+          for(let a = 0; a<this.tags.length; a++){
+            if(this.suggestionTags[j].label != this.tags[a].label){
+              tagCount = tagCount + 1;
+            }
+          }
+          if (tagCount == this.tags.length) {
+            this.tags.push(this.suggestionTags[j]);
+          }
+        }
+      }, error => console.log(error));
     }
   }
 

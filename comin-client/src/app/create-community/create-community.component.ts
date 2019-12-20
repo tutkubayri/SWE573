@@ -31,13 +31,11 @@ export class CreateCommunityComponent implements OnInit {
   tag: string;
   arr: string[];
   tags: WikiData[];
+  allTags: WikiData[];
   error = false;
   defaultPostType: PostType;
   formAreaName: FormArea;
   formAreaDescription: FormArea;
-  dropdownList = [];
-  selectedItems = [];
-  dropdownSettings = {};
 
   createCommunityAddForm() {
     this.communityAddForm = this.formBuilder.group({
@@ -47,22 +45,13 @@ export class CreateCommunityComponent implements OnInit {
       selectedTags: ["", Validators.required],
       //selectedQ:["",Validators.required], 
       bannerUrl: ["", Validators.required]
-
     });
   }
 
   ngOnInit() {
     this.submitted = false;
     this.createCommunityAddForm();
-
-    this.dropdownSettings = {
-      singleSelection: false,
-      text: "Select Tags",
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      enableSearchFilter: true,
-      classes: "myclass custom-class"
-    };
+    this.allTags = new Array<WikiData>();
   }
 
   add() {
@@ -107,7 +96,7 @@ export class CreateCommunityComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  tagSearch() {
+  tagSearch(){
     this.arr = this.communityAddForm.get("semanticTag").value.split(" ");
     this.arr.push(this.communityAddForm.get("semanticTag").value);
     for (let tagGroup of this.arr) {
@@ -116,7 +105,6 @@ export class CreateCommunityComponent implements OnInit {
         this.tagArray = data;
         this.list = true;
         this.suggestionTags = new Array<WikiData>();
-        this.tags = new Array<WikiData>();
         for (let i = 0; i < Object.entries(this.tagArray)[1][1].length; i++) {
           this.suggestionTags[i] = Object.assign({});
           this.suggestionTags[i].label = Object.values(Object.entries(Object.entries(this.tagArray)[1])[1][1][i])[6].toString();
@@ -127,38 +115,31 @@ export class CreateCommunityComponent implements OnInit {
         }
         this.tags = new Array<WikiData>();
         this.tags.push(this.suggestionTags[0]);
-        let count = 0;
+        let tagCount = 0;
         for (let j = 0; j < this.suggestionTags.length; j++) {
-          count = 0;
-          for (let k = 0; k < this.suggestionTags.length; k++) {
-            if (j != k) {
-              if (this.suggestionTags[j].label != this.suggestionTags[k].label) {
-                count = count + 1;
-              }
+          tagCount = 0;
+          for(let a = 0; a<this.tags.length; a++){
+            if(this.suggestionTags[j].label != this.tags[a].label){
+              tagCount = tagCount + 1;
             }
           }
-          if (count == this.suggestionTags.length - 1) {
+          if (tagCount == this.tags.length) {
             this.tags.push(this.suggestionTags[j]);
           }
-        }
+        } 
+        //console.log(this.tags);
+        this.all(this.tags);
+        
       }, error => console.log(error));
     }
-    this.dropdownList = this.tags;
   }
 
-  onItemSelect(item: any) {
-    console.log(item);
-    console.log(this.selectedItems);
+  all(ts: Array<WikiData>){
+    console.log(ts);
+    let arrayWikiData = new Array<WikiData>();
+    arrayWikiData = ts;
+    for(let n = 1; n<arrayWikiData.length; n++){
+      this.allTags.push(ts[n]);
+    }
   }
-  OnItemDeSelect(item: any) {
-    console.log(item);
-    console.log(this.selectedItems);
-  }
-  onSelectAll(items: any) {
-    console.log(items);
-  }
-  onDeSelectAll(items: any) {
-    console.log(items);
-  }
-
 }

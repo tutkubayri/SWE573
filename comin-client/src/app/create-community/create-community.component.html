@@ -2,41 +2,38 @@
   <form [formGroup]="communityAddForm" class="form-group" (ngSubmit)="add()">
     <h1 class="h3 mb-3 font-weight-normal">Create Community</h1>
 
-    <input type="text" id="name" formControlName="name" class="form-control" placeholder="Name" name="name">
+    <input type="text" id="name" formControlName="name" class="form-control" placeholder="Name" name="name" style="margin-bottom: 5px;">
     <div style="color: red;"
       *ngIf="communityAddForm.get('name').hasError('required') && communityAddForm.get('name').dirty">"Name" input is
       required.</div>
-
     <input type="text" id="description" formControlName="description" class="form-control" placeholder="Description"
-      name="description">
-    <div style="color: red;"
+      name="description" style="margin-bottom: 5px;">
+    <div style="color: red; margin-bottom: 5px;"
       *ngIf="communityAddForm.get('description').hasError('required') && communityAddForm.get('description').dirty">
       "Description" input is required.</div>
-
     <input type="text" id="semanticTag" formControlName="semanticTag" class="form-control" placeholder="Semantic Tag"
-      name="semanticTag">
-    <button type="button" class="btn btn-success" (click)="tagSearch()">Search in WikiData</button>
-    <div style="color: red;"
+      name="semanticTag" style="margin-bottom: 5px;">
+    <button type="button" class="btn btn-success" style="margin-bottom: 5px;" (click)="tagSearch()">Search in WikiData</button>
+    <div style="color: red; margin-bottom: 5px;"
       *ngIf="communityAddForm.get('semanticTag').hasError('required') && communityAddForm.get('semanticTag').dirty">
-      "Semantic Tag" input is required.</div>
-
-    <div *ngIf="this.list">
+      "Semantic Tag" input is required.
+    </div>
+    <div *ngIf="this.list" style="margin-bottom: 5px;">
+      <label style="color:cadetblue;"> SELECTED TAGS: {{this.communityAddForm.get("selectedTags").value}}</label>
       <select id="selectedTags" multiple class="ui fluid dropdown" formControlName="selectedTags" class="form-control" name="selectedTags" placeholder="Suggestions from WikiData">
-          <option *ngFor="let tag of this.tags" [value]="tag.qcode + ',' + tag.label">
+          <option *ngFor="let tag of this.allTags" [value]="tag.qcode + ',' + tag.label">
             {{tag.label}}
           </option>
       </select>
     </div>
-
-    
     <input type="text" id="bannerUrl" formControlName="bannerUrl" class="form-control" placeholder="Banner Url"
-      name="bannerUrl">
-    <div style="color: red;"
+      name="bannerUrl" style="margin-bottom: 5px;">
+    <div style="color: red; margin-bottom: 5px;"
       *ngIf="communityAddForm.get('bannerUrl').hasError('required') && communityAddForm.get('bannerUrl').dirty">"Banner
       Url" input is required.</div>
 
-    <button type="submit" class="btn btn-success">Create</button>
-    <div style="color: green;" *ngIf="this.submitted">Community is created successfully.</div>
-    <div style="color: red;" *ngIf="this.error">Community is not created.</div>
+    <button type="submit" class="btn btn-success" style="margin-bottom: 5px;">Create</button>
+    <div style="color: green; margin-bottom: 5px;" *ngIf="this.submitted">Community is created successfully.</div>
+    <div style="color: red; margin-bottom: 5px;" *ngIf="this.error">Community is not created.</div>
   </form>
 </body>

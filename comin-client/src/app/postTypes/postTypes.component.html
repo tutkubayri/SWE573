@@ -33,6 +33,7 @@
                 "Semantic Tag" input is required.</div>
 
             <div *ngIf="this.list">
+                <label style="color:cadetblue;"> SELECTED TAGS: {{this.tagForm.get("selectedTags").value}}</label>
                 <select id="selectedTags" multiple formControlName="selectedTags" class="form-control"
                     name="selectedTags" placeholder="Suggestions from WikiData">
                     <option *ngFor="let tag of this.tags" [value]="tag.qcode + ',' + tag.label">
