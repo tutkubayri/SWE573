@@ -151,7 +151,7 @@
                         <JAVA_OPTS>-Xss512k -XX:+UseCompressedOops</JAVA_OPTS>
                     </configVars>
                     <processTypes>
-                        <web>java $JAVA_OPTS -cp target/classes:target/dependency/* DemoApplication</web>
+                        <web>java $JAVA_OPTS -cp target/classes:target/dependency/* CominApplication</web>
                     </processTypes>
                     <buildpacks>
                         <buildpack>https://github.com/mcollina/heroku-buildpack-imagemagick</buildpack>
