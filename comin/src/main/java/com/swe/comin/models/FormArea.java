@@ -25,6 +25,14 @@ public class FormArea{
         this.enumTypeOfForm = enumTypeOfForm;
     }
 
+    public EnumType getEnumTypeOfForm() {
+        return enumTypeOfForm;
+    }
+
+    public void setEnumTypeOfForm(EnumType enumTypeOfForm) {
+        this.enumTypeOfForm = enumTypeOfForm;
+    }
+
     public boolean getRequirement() {
         return requirement;
     }
