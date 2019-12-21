@@ -9,19 +9,22 @@ import javax.annotation.PostConstruct;
 import java.util.TimeZone;
 
 @SpringBootApplication
-@EntityScan(basePackageClasses = {
+/*@EntityScan(basePackageClasses = {
         CominApplication.class,
         Jsr310JpaConverters.class
-})
+})*/
 public class CominApplication {
 
-    @PostConstruct
+   /* @PostConstruct
     void init() {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
     }
 
     public static void main(String[] args) {
         SpringApplication.run(CominApplication.class, args);
-    }
+    }*/
 
+    public static void main(String[] args) {
+        SpringApplication.run(CominApplication.class, args);
+    }
 }

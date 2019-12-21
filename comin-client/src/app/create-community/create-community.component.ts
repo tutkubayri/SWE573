@@ -9,7 +9,6 @@ import { PostType } from '../postType';
 import { NewPostTypeService } from '../services/newPostType.service';
 import { FormArea } from '../formArea';
 import { FormAreaService } from '../services/form-area.service';
-import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'create-community',
