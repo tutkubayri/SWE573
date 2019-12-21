@@ -1,3 +1,4 @@
+/*
 package com.swe.comin;
 
 import com.swe.comin.models.*;
@@ -91,3 +92,4 @@ public class TestUtils {
         return wikiDataList;
     }
 }
+*/

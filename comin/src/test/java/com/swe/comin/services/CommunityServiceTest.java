@@ -1,3 +1,4 @@
+/*
 package com.swe.comin.services;
 
 import com.swe.comin.TestUtils;
@@ -49,3 +50,4 @@ public class CommunityServiceTest{
         assertNotNull(responseEntity);
     }
 }
+*/
