@@ -1,0 +1,14 @@
+{
+  "name": "Comin",
+  "description": "CominApplication",
+  "repository": "https://github.com/tutkubayri/SWE573-Software-Development-Practice/tree/master/comin",
+  "image": "heroku/java",
+  "buildpacks": [
+    {
+      "url": "https://github.com/tutkubayri/SWE573-Software-Development-Practice/tree/master/comin"
+    },
+    {
+      "url": "heroku/java"
+    }
+  ]
+}
