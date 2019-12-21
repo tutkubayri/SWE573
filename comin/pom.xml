@@ -146,7 +146,7 @@
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>2.0.13</version>
                 <configuration>
-                    <appName>community-builder-prj</appName>
+                    <appName>cominswe</appName>
                     <configVars>
                         <JAVA_OPTS>-Xss512k -XX:+UseCompressedOops</JAVA_OPTS>
                     </configVars>
