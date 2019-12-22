@@ -91,7 +91,7 @@
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>LATEST</version>
+            <version>18.0.0</version>
             <scope>compile</scope>
         </dependency>
         <!--<dependency>
@@ -140,7 +140,9 @@
                         <JAVA_OPTS>-Xss512k -XX:+UseCompressedOops</JAVA_OPTS>
                     </configVars>
                     <processTypes>
-                        <web>java $JAVA_OPTS -cp target/classes:target/dependency/* com.swe.comin.CominApplication</web>
+                        <web>java $JAVA_OPTS -Dserver.port=$PORT -cp
+                            target/classes:target/dependency/*
+                            com.swe.comin.CominApplication</web>
                     </processTypes>
                     <buildpacks>
                         <buildpack>https://github.com/mcollina/heroku-buildpack-imagemagick</buildpack>
