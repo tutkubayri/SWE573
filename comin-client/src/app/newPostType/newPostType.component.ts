@@ -46,6 +46,7 @@ export class NewPostTypeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.allTags = new Array<WikiData>();
     this.submitted = false;
    this.createPostTypeAddForm();
    this.route.params.subscribe(params=>{
@@ -55,7 +56,11 @@ export class NewPostTypeComponent implements OnInit {
    
   save(){
     if(this.postTypeAddForm.valid){
-      this.postType = Object.assign({},this.postTypeAddForm.value)
+      let trial = {id:null, name: this.postTypeAddForm.get("name").value, usage:this.postTypeAddForm.get("usage").value,
+    semanticTag: this.postTypeAddForm.get("semanticTag").value, selectedTags: JSON.stringify(this.postTypeAddForm.get("selectedTags").value),
+  communityId: null, formAreas: null, posts: null }
+      this.postType = Object.assign({},trial);
+      console.log(this.postType);
     }
     this.submitted = true;
     this.newPostTypeService.createPostType(this.postType, this.community.id)
@@ -74,7 +79,7 @@ export class NewPostTypeComponent implements OnInit {
     this.arr.push(this.postTypeAddForm.get("semanticTag").value);
     for (let tagGroup of this.arr) {
       this.tagArray = null;
-      this.postTypeService.tagSearch(tagGroup).subscribe(data => {
+      this.communityService.tagSearch(tagGroup).subscribe(data => {
         this.tagArray = data;
         this.list = true;
         this.suggestionTags = new Array<WikiData>();
