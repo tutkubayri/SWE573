@@ -14,7 +14,7 @@
             <div class="col-md-4" *ngFor="let community of communities">
               <div class="card mb-4 shadow-sm">
                 <div class="card-body">
-                  <img class="card-img-top" [src]="community.bannerUrl" alt="Card image cap"/>
+                  <img class="card-img-top" [src]="community.bannerUrl" alt="Card image cap" style="width: 300px; height: 200px;"/>
                   <p class="card-text">{{community.name}}</p>
                   <p class="card-text">{{community.description}}</p>
                   <p class="card-text">{{community.semanticTag}}</p>

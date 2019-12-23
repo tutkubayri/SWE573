@@ -67,6 +67,7 @@ export class PostTypesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.allTags = new Array<WikiData>();
     this.submitted = false;
     this.route.params.subscribe(params=>{
       this.postTypeService.getPostTypeById(params.id).subscribe(
@@ -102,12 +103,13 @@ export class PostTypesComponent implements OnInit {
   }
 
   tagSearch(){
-    this.arr = this.formAreaInstanceAddForm.get("semanticTag").value.split(" ");
-    this.arr.push(this.formAreaInstanceAddForm.get("semanticTag").value);
+    this.arr = this.tagForm.get("semanticTag").value.split(" ");
+    this.arr.push(this.tagForm.get("semanticTag").value);
     for (let tagGroup of this.arr) {
       this.tagArray = null;
       this.postTypeService.tagSearch(tagGroup).subscribe(data => {
         this.tagArray = data;
+        console.log(this.tagArray);
         this.list = true;
         this.suggestionTags = new Array<WikiData>();
         for (let i = 0; i < Object.entries(this.tagArray)[1][1].length; i++) {
@@ -131,8 +133,7 @@ export class PostTypesComponent implements OnInit {
           if (tagCount == this.tags.length) {
             this.tags.push(this.suggestionTags[j]);
           }
-        } 
-        //console.log(this.tags);
+        }
         this.all(this.tags);
         
       }, error => console.log(error));
