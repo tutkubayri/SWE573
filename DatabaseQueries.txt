@@ -1,0 +1,12 @@
+INSERT INTO community (name, description, semantic_tag, selected_tags, banner_url)
+VALUES ("ScienceCommunity", "Community for science lovers", "science", "[Q336,science]", 
+"https://ichef.bbci.co.uk/childrens-responsive-ichef-live/r/640/1x/cbbc/science-onward-journey_v3.png");
+
+INSERT INTO post_types (name, usage, community_id, selected_tags, semantic_tag) VALUES 
+("Famous Scientists", "Information about famous scientists", 1,  "[Q901,scientist]", "scientist")
+
+INSERT INTO form_area(data_type, label, requirement, post_type_id) VALUES ("text", "Name", "true",1)
+
+INSERT INTO form_area(data_type, label, requirement, post_type_id) VALUES ("enum", "Areas", "true",1)
+
+INSERT INTO enum(value, form_area_id) VALUES ("physics;biology;chemistry;astronomy", 2)
