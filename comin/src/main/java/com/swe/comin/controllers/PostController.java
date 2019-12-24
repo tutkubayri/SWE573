@@ -5,7 +5,6 @@ import com.swe.comin.models.Post;
 import com.swe.comin.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,9 +26,6 @@ public class PostController {
     public ResponseEntity<Post> savePost(@PathVariable (value="postTypeId") Long postTypeId, @RequestBody Post post) {
         return ResponseEntity.ok(postService.savePost(postTypeId, post));
     }
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
 
     @GetMapping(value = "/jdbc/{keys}/{values}")
     public List<Post> searchResults(@PathVariable (value="keys") String[] keys, @PathVariable (value="values") String[] values){
