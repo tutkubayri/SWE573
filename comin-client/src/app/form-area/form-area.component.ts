@@ -84,6 +84,7 @@ export class FormAreaComponent implements OnInit {
   }
 
   check(e: boolean){
+    console.log(e);
     if(e == false){
       this.redirect = true;
       this.wait();

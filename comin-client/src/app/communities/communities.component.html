@@ -4,7 +4,7 @@
           <p class="lead text-muted">Let's "Comin" and create a community to find people who are interested in same topic as you.</p>
           <p>
             <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/communities/add']" >Create New Community</a>
-            <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/advanced']" >Advanced Search</a>
+            <!--<a class="btn btn-sm btn-outline-secondary" [routerLink]="['/advanced']" >Advanced Search</a>-->
           </p>
         </div>
       </section>
@@ -17,7 +17,7 @@
                   <img class="card-img-top" [src]="community.bannerUrl" alt="Card image cap" style="width: 300px; height: 200px;"/>
                   <p class="card-text">{{community.name}}</p>
                   <p class="card-text">{{community.description}}</p>
-                  <p class="card-text">{{community.semanticTag}}</p>
+                  <p class="card-text">{{community.selectedTags}}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/communities/id', community.id]" >View</a>
