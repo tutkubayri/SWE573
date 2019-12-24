@@ -18,28 +18,38 @@
         [routerLink]="['/postTypes/add', community.id]">Create New Post Type</button>
     </div>
   </div>
-</div>
+  <div class="container album py-5" style="padding: 20px;">
+    <h4 style="color: royalblue; text-align: center;">Search in this Community</h4>
+    <hr>
+    <div *ngFor="let postType of community.postTypes">
+      <div style="background-color:white; padding: 10px; margin-bottom: 5px; float: left;">
+        <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/search', postType.id]">{{ postType.name }}</a>
+      </div>
+    </div>
+  </div>
   <div class="container album py-5" style="padding: 20px;">
     <h4 style="color: royalblue; text-align: center;">Post Types</h4>
     <hr>
-    <div class="row" *ngFor="let postType of community.postTypes" >
+    <div *ngFor="let postType of community.postTypes">
       <div class="card mb-6 shadow-sm" style="background-color:white; padding: 10px; margin-bottom: 5px; float: left;">
         <h6 class="my-0 font-weight-small"><b>{{postType.name}}</b></h6>
         <p> Usage: {{postType.usage}}
           <img style="float: rigth;" type="button" [routerLink]="['/posts/add', postType.id]"
             src="https://img.icons8.com/office/24/000000/plus-2-math.png"></p>
-          </div>
       </div>
     </div>
+  </div>
   <div class="container album py-5 bg-light" style="padding: 20px;">
     <h4 style="color: royalblue; text-align: center; margin-top: -25px;">Post Types</h4>
     <hr>
     <div class="row" *ngFor="let postType of community.postTypes">
       <div class="col-md-6" *ngFor="let post of postType.posts">
-        <div class="card mb-6 shadow-sm" style="background-color:white; padding: 10px; margin-bottom: 5px; height: 166px;">
-            <p *ngFor="let area of stringToJSON(post.postText)">{{area}}</p>
-            <p>Tags: {{post.selectedTags}}</p>
+        <div class="card mb-6 shadow-sm"
+          style="background-color:white; padding: 10px; margin-bottom: 5px; height: 200px;">
+          <p *ngFor="let area of stringToJSON(post.postText)">{{area}}</p>
+          <p>Tags: {{post.selectedTags}}</p>
         </div>
       </div>
     </div>
   </div>
+</div>
