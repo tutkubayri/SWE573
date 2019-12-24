@@ -4,6 +4,7 @@ import com.swe.comin.TestUtils;
 import com.swe.comin.models.Community;
 import com.swe.comin.models.PostType;
 import com.swe.comin.repositories.CommunityRepository;
+import com.swe.comin.repositories.PostTypeRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -20,41 +21,44 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CommunityServiceTest{
+public class PostTypeServiceTest{
+
+    @Mock
+    private PostTypeRepository postTypeRepository;
 
     @Mock
     private CommunityRepository communityRepository;
 
     @InjectMocks
-    private final CommunityService communityService = new CommunityService(communityRepository);
+    private final PostTypeService postTypeService = new PostTypeService(postTypeRepository, communityRepository);
 
     @Test
-    public void testGetAllCommunities() {
+    public void testGetAllPostTypes() {
         //Prepare
-        final List<Community> communities = TestUtils.createDummyCommunityList();
-        when(communityRepository.findAll()).thenReturn(communities);
+        final List<PostType> postTypes = TestUtils.createDummyPostTypeList();
+        when(postTypeRepository.findAll()).thenReturn(postTypes);
         //Test
-        final List<Community> responseEntity = communities;
+        final List<PostType> responseEntity = postTypes;
         //Verify
         assertTrue(Objects.requireNonNull(responseEntity.size() > 0));
     }
 
     @Test
-    public void testCreateCommunity() {
+    public void testCreatePostType() {
         //Prepare
-        final Community community = TestUtils.createDummyCommunity();
-        when(communityRepository.findById(community.getId())).thenReturn(Optional.of(community));
+        final PostType postType = TestUtils.createDummyPostType();
+        when(postTypeRepository.findById(postType.getId())).thenReturn(Optional.of(postType));
         //Test
-        final Community responseEntity = communityService.saveCommunity(community);
+        final PostType responseEntity = postTypeService.savePostType(0L,postType);
         //Verify
         assertNotNull(responseEntity);
     }
 
     @Test
-    public void getCommunityById() {
-        Community community = TestUtils.createDummyCommunity();
-        when(communityRepository.findById(0L)).thenReturn(Optional.of(community));
-        final Community responseEntity = communityService.getCommunityById(0L);
+    public void getPostTypeById() {
+        PostType postType = TestUtils.createDummyPostType();
+        when(postTypeRepository.findById(0L)).thenReturn(Optional.of(postType));
+        final PostType responseEntity = postTypeService.getPostTypeById(0L);
         assertNotNull(responseEntity);
     }
 }
